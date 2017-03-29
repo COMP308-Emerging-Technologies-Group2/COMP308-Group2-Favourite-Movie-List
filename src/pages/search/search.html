@@ -15,5 +15,32 @@
 
 
 <ion-content padding>
-
+  <ion-searchbar (ionInput)="search($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let searchResult of searchResults">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+            <ion-thumbnail item-left>
+              <img src="{{searchResult.i[0]}}">
+            </ion-thumbnail>
+          </ion-col>
+          <ion-col col-9>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-12>
+                  <h1>{{searchResult.l}}</h1>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12>
+                  {{searchResult.s}}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
 </ion-content>
