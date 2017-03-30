@@ -18,7 +18,7 @@ export class SearchProvider {
     return new Promise<Array<Object>>((resolve, reject) => {
       if (typeof query !== 'undefined') {
         this.http.get(`https://cors-anywhere.herokuapp.com/v2.sg.media-imdb.com/suggests/${query[0]}/${query}.json`)
-          .subscribe(data => resolve(this._parseResponse(data['_body'], query)))
+          .subscribe(data => resolve(this._parseResponse(data['_body'], query)));
       }
       else {
         resolve([]);
@@ -30,10 +30,11 @@ export class SearchProvider {
     let results = Array<Object>();
     // replace spaces the query string with _
     query = (query).split(' ').join('_')
-    // remove the imdb part from the start oresponsef the 
-    let jsonResponse = imdbResponse.replace(`imdb$${query}(`, '')
+    // remove the imdb part from the start of the response
+    let jsonResponse = imdbResponse.replace(`imdb$${query}(`, '');
     jsonResponse = jsonResponse.substring(0, jsonResponse.length - 1);
-    jsonResponse = JSON.parse(jsonResponse)
+    jsonResponse = JSON.parse(jsonResponse);
+    // if there is a response then create an array
     if (typeof jsonResponse !== 'undefined') {
       let j: Array<Object> = jsonResponse['d'];
       j.forEach(value => {
