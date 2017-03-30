@@ -32,9 +32,9 @@ export class SearchPage {
   public searchEvent(event): void {
     let query: string = event.target.value;
     this.search.getSearchResults(query).then(value => {
-      console.log('********');
       this.searchResults = value;
-      console.log('********');
+      console.log(value);
+      
     })
   }
 
