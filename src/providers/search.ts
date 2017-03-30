@@ -29,7 +29,7 @@ export class SearchProvider {
   private _parseResponse(imdbResponse: string, query: string): Array<Object> {
     let results = Array<Object>();
     // replace spaces the query string with _
-    query = (query).split(' ').join('_')
+    query = (query).split(' ').join('_');
     // remove the imdb part from the start of the response
     let jsonResponse = imdbResponse.replace(`imdb$${query}(`, '');
     jsonResponse = jsonResponse.substring(0, jsonResponse.length - 1);

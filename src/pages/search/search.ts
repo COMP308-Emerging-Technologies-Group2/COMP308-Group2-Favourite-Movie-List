@@ -35,7 +35,7 @@ export class SearchPage {
       this.searchResults = value;
       console.log(value);
       
-    })
+    });
   }
 
   public onCancel(): void { }
