@@ -1,23 +1,64 @@
 import {Component} from "@angular/core";
-import {NavController, NavParams} from "ionic-angular";
+import {NavController, AlertController, LoadingController, Loading} from "ionic-angular";
+import {FormBuilder, Validators, FormGroup} from "@angular/forms";
+import {AuthData} from "../../providers/auth-data";
+import {EmailValidator} from "../../validators/email";
+import {ResetPasswordPage} from "../reset-password/reset-password";
+import {RegisterPage} from "../register/register";
+import {Page1} from "../page1/page1";
 
-/*
- Generated class for the Login page.
-
- See http://ionicframework.com/docs/v2/components/#navigation for more info on
- Ionic pages and navigation.
- */
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
+  loginForm: FormGroup;
+  loading: Loading;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public alertCtrl: AlertController,
+              public loadingCtrl: LoadingController,
+              public formBuilder: FormBuilder,
+              public authData: AuthData) {
+    this.loginForm = formBuilder.group({
+      email: ['',
+        Validators.compose([Validators.required, EmailValidator.isValid])],
+      password: ['',
+        Validators.compose([Validators.minLength(6), Validators.required])]
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  goToResetPassword() {
+    this.navCtrl.push(ResetPasswordPage);
   }
 
+  createAccount() {
+    this.navCtrl.push(RegisterPage);
+  }
+
+  loginUser() {
+    if (!this.loginForm.valid) {
+      console.log(this.loginForm.value);
+    } else {
+      let email = this.loginForm.value.email;
+      let password = this.loginForm.value.password;
+
+      this.loading = this.loadingCtrl.create();
+      this.loading.present();
+
+      this.authData.login(email, password)
+        .then(authData => {
+          this.loading.dismiss().then(() => {
+            this.navCtrl.setRoot(Page1);
+          });
+        }, error => {
+          this.loading.dismiss().then(() => {
+            this.alertCtrl.create({
+              message: error.message,
+              buttons: [{text: 'Ok', role: 'Cancel'}]
+            }).present();
+          });
+        });
+    }
+  }
 }
