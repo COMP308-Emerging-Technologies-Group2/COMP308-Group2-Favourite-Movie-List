@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Search</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-searchbar (ionInput)="searchEvent($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
+  <ion-list>
+    <button text-wrap ion-item *ngFor="let searchResult of searchResults" (click)="viewDetails(searchResult)" >
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+            <ion-thumbnail item-left>
+              <img src="{{searchResult.i[0]}}">
+            </ion-thumbnail>
+          </ion-col>
+          <ion-col col-9>
+              <h1>{{searchResult.l}}</h1>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </button>
+  </ion-list>
+</ion-content>
