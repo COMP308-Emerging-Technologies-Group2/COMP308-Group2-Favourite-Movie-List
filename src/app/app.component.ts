@@ -1,12 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { HomePage } from '../pages/home/home';
-import { SearchPage } from '../pages/search/search';
+import {Component, ViewChild} from "@angular/core";
+import {Nav, Platform} from "ionic-angular";
+import {StatusBar} from "@ionic-native/status-bar";
+import {SplashScreen} from "@ionic-native/splash-screen";
+import {HomePage} from "../pages/home/home";
+import {SearchPage} from "../pages/search/search";
 import {AngularFire} from "angularfire2";
 import {LoginPage} from "../pages/login/login";
-
 
 
 @Component({
@@ -28,7 +27,8 @@ export class MyApp {
     this.pages = [
 
       { title: 'Home', component: HomePage },
-      { title: 'Search', component: SearchPage }
+      {title: 'Search', component: SearchPage},
+      {title: 'Logout', component: LoginPage}
 
     ];
 
@@ -36,7 +36,6 @@ export class MyApp {
       if (user) {
         this.rootPage = HomePage;
         authObserver.unsubscribe();
-        this.pages.push({title: 'Logout', component : LoginPage});
       } else {
         this.rootPage = LoginPage;
         authObserver.unsubscribe();
@@ -56,10 +55,10 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    if(page.component.title == 'Logout'){
+    if (page.title === 'Logout') {
       this.af.auth.logout();
     }
-    
+
     this.nav.setRoot(page.component);
   }
 }
