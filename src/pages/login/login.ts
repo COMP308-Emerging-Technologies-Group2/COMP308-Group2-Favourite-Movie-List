@@ -5,7 +5,7 @@ import {AuthData} from "../../providers/auth-data";
 import {EmailValidator} from "../../validators/email";
 import {ResetPasswordPage} from "../reset-password/reset-password";
 import {RegisterPage} from "../register/register";
-import {Page1} from "../page1/page1";
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'page-login',
@@ -49,7 +49,7 @@ export class LoginPage {
       this.authData.login(email, password)
         .then(authData => {
           this.loading.dismiss().then(() => {
-            this.navCtrl.setRoot(Page1);
+            this.navCtrl.setRoot(HomePage);
           });
         }, error => {
           this.loading.dismiss().then(() => {

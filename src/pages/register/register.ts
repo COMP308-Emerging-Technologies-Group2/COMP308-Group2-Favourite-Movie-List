@@ -3,7 +3,7 @@ import {NavController, Loading, AlertController, LoadingController} from "ionic-
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {AuthData} from "../../providers/auth-data";
 import {EmailValidator} from "../../validators/email";
-import {Page1} from "../page1/page1";
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'page-register',
@@ -37,7 +37,7 @@ export class RegisterPage {
       this.authData.register(email, password)
         .then(() => {
           this.loading.dismiss().then(() => {
-            this.navCtrl.setRoot(Page1);
+            this.navCtrl.setRoot(HomePage);
           });
         }, error => {
           this.loading.dismiss().then(() => {
