@@ -10,12 +10,13 @@
 
 <ion-content>
   <ion-searchbar (ionInput)="searchEvent($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
+  <div *ngIf="searchResults">
   <ion-list>
     <button text-wrap ion-item *ngFor="let searchResult of searchResults" (click)="viewDetails(searchResult)" >
       <ion-grid>
         <ion-row>
           <ion-col col-3>
-            <ion-thumbnail item-left>
+            <ion-thumbnail item-left *ngIf="searchResult.i">
               <img src="{{searchResult.i[0]}}">
             </ion-thumbnail>
           </ion-col>
@@ -26,4 +27,8 @@
       </ion-grid>
     </button>
   </ion-list>
+  </div>
+  <div *ngIf="!searchResults" padding>
+    <h2>No results found</h2>
+  </div>
 </ion-content>

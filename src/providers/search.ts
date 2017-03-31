@@ -35,7 +35,7 @@ export class SearchProvider {
     jsonResponse = jsonResponse.substring(0, jsonResponse.length - 1);
     jsonResponse = JSON.parse(jsonResponse);
     // if there is a response then create an array
-    if (typeof jsonResponse !== 'undefined') {
+    if (typeof jsonResponse['d'] !== 'undefined') {
       let j: Array<Object> = jsonResponse['d'];
       j.forEach(value => {
         if (typeof value['q'] !== 'undefined') {
