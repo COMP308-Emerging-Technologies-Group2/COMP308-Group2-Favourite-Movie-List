@@ -20,7 +20,7 @@ export class RegisterPage {
               public authData: AuthData) {
     this.registerForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
     });
   }
 

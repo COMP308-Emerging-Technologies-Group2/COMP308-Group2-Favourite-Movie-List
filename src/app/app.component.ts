@@ -24,17 +24,16 @@ export class MyApp {
               public af: AngularFire) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [
       {title: 'Page One', component: Page1},
-      {title: 'Page Two', component: Page2},
-      {title: 'Login', component: LoginPage}
+      {title: 'Page Two', component: Page2}
     ];
 
     const authObserver = af.auth.subscribe(user => {
       if (user) {
         this.rootPage = Page1;
         authObserver.unsubscribe();
+        this.pages.push({title: 'Logout', component : LoginPage});
       } else {
         this.rootPage = LoginPage;
         authObserver.unsubscribe();
@@ -54,6 +53,10 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
+    if(page.component.title == 'Logout'){
+      this.af.auth.logout();
+    }
+    
     this.nav.setRoot(page.component);
   }
 }
