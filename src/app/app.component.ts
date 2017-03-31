@@ -1,11 +1,12 @@
-import {Component, ViewChild} from "@angular/core";
-import {Nav, Platform} from "ionic-angular";
-import {StatusBar} from "@ionic-native/status-bar";
-import {SplashScreen} from "@ionic-native/splash-screen";
-import {Page1} from "../pages/page1/page1";
-import {Page2} from "../pages/page2/page2";
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { HomePage } from '../pages/home/home';
+import { SearchPage } from '../pages/search/search';
 import {AngularFire} from "angularfire2";
 import {LoginPage} from "../pages/login/login";
+
 
 
 @Component({
@@ -14,7 +15,7 @@ import {LoginPage} from "../pages/login/login";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any;
+  rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -25,13 +26,15 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      {title: 'Page One', component: Page1},
-      {title: 'Page Two', component: Page2}
+
+      { title: 'Home', component: HomePage },
+      { title: 'Search', component: SearchPage }
+
     ];
 
     const authObserver = af.auth.subscribe(user => {
       if (user) {
-        this.rootPage = Page1;
+        this.rootPage = HomePage;
         authObserver.unsubscribe();
         this.pages.push({title: 'Logout', component : LoginPage});
       } else {

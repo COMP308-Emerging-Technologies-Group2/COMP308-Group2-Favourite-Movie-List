@@ -1,8 +1,6 @@
 import {NgModule, ErrorHandler} from "@angular/core";
 import {IonicApp, IonicModule, IonicErrorHandler} from "ionic-angular";
 import {MyApp} from "./app.component";
-import {Page1} from "../pages/page1/page1";
-import {Page2} from "../pages/page2/page2";
 import {StatusBar} from "@ionic-native/status-bar";
 import {SplashScreen} from "@ionic-native/splash-screen";
 import {AngularFireModule, AuthProviders, AuthMethods} from "angularfire2";
@@ -10,6 +8,8 @@ import {AuthData} from "../providers/auth-data";
 import {RegisterPage} from "../pages/register/register";
 import {LoginPage} from "../pages/login/login";
 import {ResetPasswordPage} from "../pages/reset-password/reset-password";
+import { SearchPage } from '../pages/search/search';
+import { HomePage } from '../pages/home/home';
 
 // AF2 Settings
 const firebaseConfig = {
@@ -28,11 +28,11 @@ const firebaseAuthConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    Page1,
-    Page2,
     LoginPage,
     RegisterPage,
-    ResetPasswordPage
+    ResetPasswordPage,
+    SearchPage,
+    HomePage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -41,11 +41,11 @@ const firebaseAuthConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    Page1,
-    Page2,
     LoginPage,
     RegisterPage,
-    ResetPasswordPage
+    ResetPasswordPage,
+    SearchPage,
+    HomePage
   ],
   providers: [
     StatusBar,
