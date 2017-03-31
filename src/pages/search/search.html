@@ -16,7 +16,7 @@
       <ion-grid>
         <ion-row>
           <ion-col col-3>
-            <ion-thumbnail item-left>
+            <ion-thumbnail item-left *ngIf="searchResult.i">
               <img src="{{searchResult.i[0]}}">
             </ion-thumbnail>
           </ion-col>
