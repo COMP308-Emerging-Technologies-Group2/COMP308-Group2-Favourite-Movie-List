@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Loading, Content } from 'ionic-angular';
 
 
 @Component({
@@ -10,21 +10,36 @@ import { NavController, NavParams, LoadingController, Loading } from 'ionic-angu
 export class HomePage {
 
   private _popularMovieScrapperUrl = 'https://comp308-group2-imdb-scraper.herokuapp.com/';
-  private loading:Loading;
-  
+  private loading: Loading;
+
   public mostPopularMovies = new Array<Object>();
   public mostPopularTV = new Array<Object>();
-  public media='movies';
+  public movieIndex: number;
+  public tvIndex: number;
+  public media = 'movies';
 
+  @ViewChild(Content) list: Content;
+
+  /**
+   * Creates an instance of HomePage.
+   * @param {NavController} navCtrl 
+   * @param {NavParams} navParams 
+   * @param {Http} http 
+   * @param {LoadingController} loadingCtrl 
+   * 
+   * @memberOf HomePage
+   */
   constructor(
-      private navCtrl: NavController,
-      private navParams: NavParams,
-      private http:Http,
-      private loadingCtrl: LoadingController
-    )
-  {
+    private navCtrl: NavController,
+    private navParams: NavParams,
+    private http: Http,
+    private loadingCtrl: LoadingController
+  ) {
     this.loading = this.loadingCtrl.create();
     this.loading.present();
+
+    this.movieIndex = 10;
+    this.tvIndex = 10;
 
     this.mostPopularMovies = new Array<Object>();
     this.mostPopularTV = new Array<Object>();
@@ -40,7 +55,7 @@ export class HomePage {
    * 
    * @memberOf HomePage
    */
-  private _getTopMovies():void{
+  private _getTopMovies(): void {
     this.http.get(this._popularMovieScrapperUrl + 'mostPopularMovies').subscribe(
       data => this.mostPopularMovies = data.json()['mostPopularMovies']
     );
@@ -57,12 +72,12 @@ export class HomePage {
    * 
    * @memberOf HomePage
    */
-  private _getTopTv():void{
-     
+  private _getTopTv(): void {
+
     this.http.get(this._popularMovieScrapperUrl + 'mostPopularTvs').subscribe(
       data => this.mostPopularTV = data.json()['mostPopularTvs'],
       err => console.log(err),
-      ()=> this.loading.dismiss()      
+      () => this.loading.dismiss()
     );
   }
 
@@ -73,12 +88,49 @@ export class HomePage {
    * 
    * @memberOf HomePage
    */
-  public viewDetails(id: string){
+  public viewDetails(id: string) {
     //TODO goto details page here
   }
 
+
+  /**
+   * Increments the movie or tv
+   * indexes 
+   * 
+   * @param {any} infiniteScroll 
+   * @param {string} media 
+   * 
+   * @memberOf HomePage
+   */
+  public doInfinite(infiniteScroll, media: string) {
+    console.log(media);
+
+    if (media === 'movies') {
+      this.movieIndex += 10;
+    }
+    else if (media === 'tv') {
+      this.tvIndex += 10;
+    }
+
+    infiniteScroll.complete();
+
+  }
+
+
+  /**
+   * runs when the pages loads
+   * 
+   * @memberOf HomePage
+   */
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
   }
+
+  /**
+   * Scrolls the page up when user switches tabs
+   * 
+   * @memberOf HomePage
+   */
+  public changed() { this.list.scrollToTop(); }
 
 }

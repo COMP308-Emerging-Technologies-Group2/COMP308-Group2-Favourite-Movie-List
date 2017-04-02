@@ -13,7 +13,7 @@
     <ion-title>Home</ion-title>
   </ion-navbar>
   <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="media">
+    <ion-segment [(ngModel)]="media" (ionChange)="changed()">
       <ion-segment-button value="movies">
         Movies
       </ion-segment-button>
@@ -27,15 +27,16 @@
 
 <ion-content padding>
   <div [ngSwitch]="media">
-    <ion-list *ngSwitchCase="'movies'">
-      <button ion-item *ngFor="let movie of mostPopularMovies" (click)="viewDetails(movie.id)">
+
+    <ion-list #list *ngSwitchCase="'movies'">
+      <button ion-item *ngFor="let movie of mostPopularMovies.slice(0,movieIndex)" (click)="viewDetails(movie.id)">
         <ion-grid>
           <ion-row>
           <ion-col col-3>
             <img src="{{movie.smallPosterUrl}}">
           </ion-col>
           <ion-col col-9>
-            <h1>{{movie.title}}</h1>
+            <h1 text-wrap>{{movie.title}}</h1>
             <div *ngIf="movie.rating">
               <p>{{movie.rating}}</p>
             </div>
@@ -48,8 +49,9 @@
       </button>
     </ion-list>
 
+
     <ion-list *ngSwitchCase="'tv'">
-      <button ion-item *ngFor="let tv of mostPopularTV" (click)="viewDetails(tv.id)">
+      <button ion-item *ngFor="let tv of mostPopularTV.slice(0,tvIndex)" (click)="viewDetails(tv.id)">
         <ion-grid>
           <ion-row>
           <ion-col col-3>
@@ -68,5 +70,15 @@
         </ion-grid>
       </button>
     </ion-list>
+    <div *ngIf="media=='movies'">
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event, 'movies')">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+    <div *ngIf="media=='tv'">
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event, 'tv')">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
   </div>
 </ion-content>
