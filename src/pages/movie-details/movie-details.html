@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card>
+
+    <ion-item>
+
+      <h1 text-wrap>{{media.title}} <p>{{media.released | date:'mediumDate' }}</p></h1>
+      
+    </ion-item>
+
+    <img src="{{media.poster}}">
+
+    <ion-card-content>
+      <p>{{media.plot}}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+        <ion-icon name="star"></ion-icon>
+        <div>{{media.metascore}}%</div>
+      </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+        <ion-icon name="person"></ion-icon>
+        <div>Rated: {{media.rated}}</div>
+      </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          runtime: {{media.runtime}}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</ion-content>
