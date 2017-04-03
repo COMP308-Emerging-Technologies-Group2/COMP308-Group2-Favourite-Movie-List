@@ -13,14 +13,39 @@
 
     <ion-item>
 
-      <h1 text-wrap>{{media.title}} <p>{{media.released | date:'mediumDate' }}</p></h1>
-      
+      <h1 text-wrap>{{media.title}}
+        <p>{{media.released | date:'mediumDate' }}</p>
+      </h1>
+
     </ion-item>
 
     <img src="{{media.poster}}">
 
     <ion-card-content>
       <p>{{media.plot}}</p>
+
+      <ion-item>
+        <ion-icon name="people" item-left large></ion-icon>
+        <h2>Actors</h2>
+        <p text-wrap>{{media.actors}}</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="videocam" item-left large></ion-icon>
+        <h2>Director</h2>
+        <p text-wrap>{{media.director}}</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="film" item-left large></ion-icon>
+        <h2>Genres</h2>
+        <p text-wrap>{{media.genres}}</p>
+      </ion-item>
+
+      <button ion-item large icon-left text-center color="primary">
+        <ion-icon name="bookmark"></ion-icon>
+        Add to Favourites
+      </button>
     </ion-card-content>
 
     <ion-row>
