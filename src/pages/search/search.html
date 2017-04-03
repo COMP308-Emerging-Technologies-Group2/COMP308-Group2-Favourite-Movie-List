@@ -9,7 +9,7 @@
 
 
 <ion-content>
-  <ion-searchbar (ionInput)="searchEvent($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
+  <ion-searchbar type="search" (ionInput)="searchEvent($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
   <div *ngIf="searchResults">
   <ion-list>
     <button text-wrap ion-item *ngFor="let searchResult of searchResults" (click)="viewDetails(searchResult)" >
