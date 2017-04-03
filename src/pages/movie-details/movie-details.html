@@ -30,10 +30,17 @@
         <p text-wrap>{{media.actors}}</p>
       </ion-item>
 
-      <ion-item>
+      <ion-item *ngIf="media.director!='N/A'">
         <ion-icon name="videocam" item-left large></ion-icon>
         <h2>Director</h2>
         <p text-wrap>{{media.director}}</p>
+      </ion-item>
+
+
+      <ion-item *ngIf="media.director=='N/A'">
+        <ion-icon name="videocam" item-left large></ion-icon>
+        <h2>Writer</h2>
+        <p text-wrap>{{media.writer}}</p>
       </ion-item>
 
       <ion-item>
@@ -52,7 +59,7 @@
       <ion-col>
         <button ion-button icon-left clear small>
         <ion-icon name="star"></ion-icon>
-        <div>{{media.metascore}}%</div>
+        <div>{{media.rating}}</div>
       </button>
       </ion-col>
       <ion-col>

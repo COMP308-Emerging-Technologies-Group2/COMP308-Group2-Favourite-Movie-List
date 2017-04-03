@@ -90,7 +90,6 @@ export class HomePage {
    * @memberOf HomePage
    */
   public viewDetails(id: string) {
-    //TODO goto details page here
     this.navCtrl.push(MovieDetailsPage,{
       'id': id
     });
