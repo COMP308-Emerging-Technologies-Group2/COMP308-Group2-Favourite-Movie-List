@@ -27,7 +27,10 @@ export class MovieDetailsPage {
         }
       }
     );
+  }
 
+  public AddToFavorites():void{
+    console.log(this.media.imdbid);
   }
 
   ionViewDidLoad() {
