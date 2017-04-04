@@ -4,7 +4,8 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {AuthData} from "../../providers/auth-data";
 import {EmailValidator} from "../../validators/email";
 import {HomePage} from "../home/home";
-import {UserModel} from "../../models/user";
+import {UserSettingsModel} from "../../models/user-settings";
+import {EmailPasswordCredentials} from "angularfire2/auth";
 
 @Component({
   selector: 'page-register',
@@ -30,13 +31,16 @@ export class RegisterPage {
     if (!this.registerForm.valid) {
       console.log(this.registerForm.value);
     } else {
-      let user: UserModel = new UserModel(this.registerForm.value.email,
-        this.registerForm.value.password, this.registerForm.value.displayName);
+      let credentials: EmailPasswordCredentials = {
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password
+      };
+      let userSettings: UserSettingsModel = new UserSettingsModel(this.registerForm.value.displayName);
 
       this.loading = this.loadingCtrl.create();
       this.loading.present();
 
-      this.authData.register(user)
+      this.authData.register(credentials, userSettings)
         .then(() => {
           this.loading.dismiss().then(() => {
             this.navCtrl.setRoot(HomePage);
