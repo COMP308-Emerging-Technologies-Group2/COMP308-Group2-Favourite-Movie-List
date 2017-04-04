@@ -1,17 +1,18 @@
 import {Injectable} from "@angular/core";
 import "rxjs/add/operator/map";
-import {AngularFire} from "angularfire2";
+import {AngularFire, FirebaseAuthState} from "angularfire2";
 import firebase from "firebase";
+import {UserModel} from "../models/user";
+
+const userSettingsUrl = '/user-settings';
 
 @Injectable()
 export class AuthData {
-  fireAuth: any;
+  authState: FirebaseAuthState;
 
   constructor(public af: AngularFire) {
-    af.auth.subscribe(user => {
-      if (user) {
-        this.fireAuth = user.auth;
-      }
+    af.auth.subscribe((auth: FirebaseAuthState) => {
+      this.authState = auth;
     });
   }
 
@@ -27,7 +28,15 @@ export class AuthData {
     return this.af.auth.logout();
   }
 
-  register(email: string, password: string): firebase.Promise<any> {
-    return this.af.auth.createUser({email, password});
+  register(user: UserModel): firebase.Promise<any> {
+    return this.af.auth.createUser({email: user.email, password: user.password})
+      .then(() => {
+        let userSettings = {};
+        userSettings[this.authState.uid] = {
+          displayName: user.displayName
+        };
+
+        this.af.database.object(userSettingsUrl).update(userSettings);
+      });
   }
 }

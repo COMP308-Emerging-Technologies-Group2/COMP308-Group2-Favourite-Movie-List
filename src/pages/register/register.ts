@@ -4,6 +4,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {AuthData} from "../../providers/auth-data";
 import {EmailValidator} from "../../validators/email";
 import {HomePage} from "../home/home";
+import {UserModel} from "../../models/user";
 
 @Component({
   selector: 'page-register',
@@ -21,6 +22,7 @@ export class RegisterPage {
     this.registerForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      displayName: ['', Validators.compose([Validators.required])]
     });
   }
 
@@ -28,13 +30,13 @@ export class RegisterPage {
     if (!this.registerForm.valid) {
       console.log(this.registerForm.value);
     } else {
-      let email = this.registerForm.value.email;
-      let password = this.registerForm.value.password;
+      let user: UserModel = new UserModel(this.registerForm.value.email,
+        this.registerForm.value.password, this.registerForm.value.displayName);
 
       this.loading = this.loadingCtrl.create();
       this.loading.present();
 
-      this.authData.register(email, password)
+      this.authData.register(user)
         .then(() => {
           this.loading.dismiss().then(() => {
             this.navCtrl.setRoot(HomePage);
