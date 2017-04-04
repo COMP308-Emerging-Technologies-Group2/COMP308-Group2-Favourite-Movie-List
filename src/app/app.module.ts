@@ -13,6 +13,7 @@ import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { SearchPage } from '../pages/search/search';
 import { HomePage } from '../pages/home/home';
+import { UserSettingsProvider } from '../providers/user-settings';
 
 // AF2 Settings
 const firebaseConfig = {
@@ -56,7 +57,8 @@ const firebaseAuthConfig = {
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AuthData
+    AuthData,
+    UserSettingsProvider
   ]
 })
 export class AppModule {

@@ -35,7 +35,8 @@ export class RegisterPage {
         email: this.registerForm.value.email,
         password: this.registerForm.value.password
       };
-      let userSettings: UserSettingsModel = new UserSettingsModel(this.registerForm.value.displayName);
+      let userSettings: UserSettingsModel =
+        new UserSettingsModel(credentials.email, this.registerForm.value.displayName);
 
       this.loading = this.loadingCtrl.create();
       this.loading.present();

@@ -4,14 +4,13 @@ import {AngularFire, FirebaseAuthState} from "angularfire2";
 import firebase from "firebase";
 import {UserSettingsModel} from "../models/user-settings";
 import {EmailPasswordCredentials} from "angularfire2/auth";
-
-const userSettingsUrl = '/user-settings';
+import {UserSettingsProvider} from "./user-settings";
 
 @Injectable()
 export class AuthData {
   authState: FirebaseAuthState;
 
-  constructor(public af: AngularFire) {
+  constructor(public af: AngularFire, public us: UserSettingsProvider) {
     af.auth.subscribe((auth: FirebaseAuthState) => {
       this.authState = auth;
     });
@@ -29,15 +28,8 @@ export class AuthData {
     return this.af.auth.logout();
   }
 
-  register(credentials: EmailPasswordCredentials, user: UserSettingsModel): firebase.Promise<any> {
+  register(credentials: EmailPasswordCredentials, userSettings: UserSettingsModel): firebase.Promise<any> {
     return this.af.auth.createUser(credentials)
-      .then(() => {
-        let userSettings = {};
-        userSettings[this.authState.uid] = {
-          displayName: user.displayName
-        };
-
-        this.af.database.object(userSettingsUrl).update(userSettings);
-      });
+      .then(() => this.us.updateUserSettings(this.authState.uid, userSettings));
   }
 }
