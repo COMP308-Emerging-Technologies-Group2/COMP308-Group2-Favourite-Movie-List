@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams, LoadingController, Loading, Content } from 'ionic-angular';
+import { MovieDetailsPage } from '../../pages/movie-details/movie-details';
 
 
 @Component({
@@ -89,7 +90,9 @@ export class HomePage {
    * @memberOf HomePage
    */
   public viewDetails(id: string) {
-    //TODO goto details page here
+    this.navCtrl.push(MovieDetailsPage,{
+      'id': id
+    });
   }
 
 
