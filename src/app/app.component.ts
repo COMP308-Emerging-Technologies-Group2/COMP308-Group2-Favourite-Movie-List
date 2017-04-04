@@ -6,6 +6,8 @@ import {HomePage} from '../pages/home/home';
 import {SearchPage} from '../pages/search/search';
 import {AngularFire} from 'angularfire2';
 import {LoginPage} from '../pages/login/login';
+import {UserDetailsPage} from '../pages/user-details/user-details';
+import {AuthData} from '../providers/auth-data';
 
 
 @Component({
@@ -21,13 +23,15 @@ export class MyApp {
   constructor(public platform: Platform,
               public statusBar: StatusBar,
               public splashScreen: SplashScreen,
-              public af: AngularFire) {
+              public af: AngularFire,
+              public authData: AuthData) {
     this.initializeApp();
 
     this.pages = [
 
       { title: 'Home', component: HomePage },
       {title: 'Search', component: SearchPage},
+      {title: 'My Profile', component: UserDetailsPage},
       {title: 'Logout', component: LoginPage}
 
     ];
@@ -59,6 +63,10 @@ export class MyApp {
       this.af.auth.logout();
     }
 
-    this.nav.setRoot(page.component);
+    if (page.title === 'My Profile') {
+      this.nav.setRoot(page.component, {userId: this.authData.authState.uid});
+    } else {
+      this.nav.setRoot(page.component);
+    }
   }
 }

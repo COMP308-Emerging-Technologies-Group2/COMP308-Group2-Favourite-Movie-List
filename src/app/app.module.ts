@@ -14,6 +14,8 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { SearchPage } from '../pages/search/search';
 import { HomePage } from '../pages/home/home';
 import { UserSettingsProvider } from '../providers/user-settings';
+import { UserDetailsPage } from '../pages/user-details/user-details';
+import { UpdateUserProfilePage } from '../pages/update-user-profile/update-user-profile';
 
 // AF2 Settings
 const firebaseConfig = {
@@ -37,7 +39,9 @@ const firebaseAuthConfig = {
     ResetPasswordPage,
     SearchPage,
     HomePage,
-    MovieDetailsPage
+    MovieDetailsPage,
+    UserDetailsPage,
+    UpdateUserProfilePage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -51,7 +55,9 @@ const firebaseAuthConfig = {
     ResetPasswordPage,
     SearchPage,
     HomePage,
-    MovieDetailsPage
+    MovieDetailsPage,
+    UserDetailsPage,
+    UpdateUserProfilePage
   ],
   providers: [
     StatusBar,

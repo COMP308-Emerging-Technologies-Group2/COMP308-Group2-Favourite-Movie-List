@@ -14,10 +14,10 @@ export class UserSettingsProvider {
     return this.af.database.object(`${userSettingsUrl}/${userId}`);
   }
 
-  updateUserSettings(userId: string, userSettings: UserSettingsModel) {
+  updateUserSettings(userId: string, userSettings: UserSettingsModel): firebase.Promise<void>  {
     let collection = {};
     collection[userId] = userSettings;
 
-    this.af.database.object(userSettingsUrl).update(collection);
+    return this.af.database.object(userSettingsUrl).update(collection);
   }
 }
