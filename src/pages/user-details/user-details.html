@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="userSettings">{{userSettings.displayName}}</ion-title>
+    <ion-title *ngIf="!userSettings">User Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list *ngIf="userSettings" no-lines>
+    <ion-item>
+      <ion-avatar item-left>
+        <ion-icon name="contact"></ion-icon>
+      </ion-avatar>
+      <h2>{{userSettings.displayName}}</h2>
+      <h3>{{userSettings.email}}</h3>
+    </ion-item>
+    <ion-buttons text-center>
+      <button ion-button icon-right round small (click)="showUpdateUserProfilePage()">
+        Update Profile
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-list>
+</ion-content>
