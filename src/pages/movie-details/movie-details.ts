@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
+
+// import angularfire
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+
 
 @Component({
   selector: 'page-movie-details',
@@ -10,8 +14,20 @@ export class MovieDetailsPage {
 
   private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
   public media;
+  public favorites: FirebaseListObservable<any[]>;
+  public userId: string;
+  public value: FirebaseObjectObservable<any>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http) {
+  constructor(public navCtrl: NavController, 
+  public navParams: NavParams, 
+  private http:Http,
+  public af: AngularFire,
+  public alertCtrl: AlertController) {
+
+    // This might have to be in the ionViewDidLoad place
+    this.af.auth.subscribe(auth => this.userId = auth.uid);
+    this.favorites = af.database.list('/users-favorites/' + this.userId);
+    this.value = af.database.object(this.userId);
 
     this.media = {};
 
@@ -29,8 +45,15 @@ export class MovieDetailsPage {
     );
   }
 
-  public AddToFavorites():void{
+  public AddToFavorites() : void {
+
+    console.log(this.userId);
     console.log(this.media.imdbid);
+    
+    this.favorites.push({
+      imdbID: this.media.imdbid,
+      public: true
+    });
   }
 
   ionViewDidLoad() {

@@ -7,12 +7,23 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>favorites</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Favorites</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-list>
+    <ion-item *ngFor="let song of songs | async">
+      {{song.title}}
+    </ion-item>
+  </ion-list>
+
+  <ion-item *ngFor="let song of songs | async" (click)="showOptions(song.$key, song.title)">
 
 </ion-content>
