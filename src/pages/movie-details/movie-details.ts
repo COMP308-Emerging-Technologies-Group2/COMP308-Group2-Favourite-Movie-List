@@ -10,6 +10,7 @@ export class MovieDetailsPage {
 
   private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
   public media;
+  public posterAvailable:boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http) {
 
@@ -25,6 +26,10 @@ export class MovieDetailsPage {
         if(data['_episodes']){
           console.log('there are _episodes');
         }
+        if(data['poster']!=='N/A'){
+          this.posterAvailable = true;
+        }
+        console.log('poster:' + this.posterAvailable);
       }
     );
 
