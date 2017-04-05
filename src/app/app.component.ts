@@ -6,6 +6,7 @@ import {HomePage} from '../pages/home/home';
 import {SearchPage} from '../pages/search/search';
 import {AngularFire} from 'angularfire2';
 import {LoginPage} from '../pages/login/login';
+import {FavoritesPage} from '../pages/favorites/favorites';
 
 
 @Component({
@@ -27,8 +28,9 @@ export class MyApp {
     this.pages = [
 
       { title: 'Home', component: HomePage },
-      {title: 'Search', component: SearchPage},
-      {title: 'Logout', component: LoginPage}
+      { title: 'Favorites', component : FavoritesPage},
+      { title: 'Search', component: SearchPage},
+      { title: 'Logout', component: LoginPage }
 
     ];
 

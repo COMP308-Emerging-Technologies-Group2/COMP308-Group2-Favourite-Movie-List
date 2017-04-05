@@ -11,6 +11,7 @@ import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { SearchPage } from '../pages/search/search';
 import { HomePage } from '../pages/home/home';
+import {FavoritesPage} from '../pages/favorites/favorites';
 
 // AF2 Settings
 const firebaseConfig = {
@@ -34,7 +35,8 @@ const firebaseAuthConfig = {
     ResetPasswordPage,
     SearchPage,
     HomePage,
-    MovieDetailsPage
+    MovieDetailsPage,
+    FavoritesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -48,7 +50,8 @@ const firebaseAuthConfig = {
     ResetPasswordPage,
     SearchPage,
     HomePage,
-    MovieDetailsPage
+    MovieDetailsPage,
+    FavoritesPage
   ],
   providers: [
     StatusBar,

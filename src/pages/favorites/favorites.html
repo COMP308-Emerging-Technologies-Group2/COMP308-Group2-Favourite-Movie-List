@@ -4,6 +4,9 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
+
+
 <ion-header>
 
   <ion-navbar>
@@ -19,11 +22,9 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item *ngFor="let song of songs | async">
-      {{song.title}}
+    <ion-item *ngFor="let favorite of favorites | async">
+      {{favorite.imdbID}}
     </ion-item>
   </ion-list>
-
-  <ion-item *ngFor="let song of songs | async" (click)="showOptions(song.$key, song.title)">
 
 </ion-content>

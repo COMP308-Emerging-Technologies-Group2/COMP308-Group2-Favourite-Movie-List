@@ -14,7 +14,7 @@ export class MovieDetailsPage {
 
   private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
   public media;
-  public favorites: FirebaseListObservable<any[]>;
+  public favorites: FirebaseListObservable<any>;
   public userId: string;
   public value: FirebaseObjectObservable<any>;
 
