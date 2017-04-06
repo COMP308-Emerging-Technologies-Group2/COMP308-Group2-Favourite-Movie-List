@@ -16,12 +16,13 @@
       <ion-grid>
         <ion-row>
           <ion-col col-3>
-            <!--<ion-thumbnail item-left *ngIf="searchResult.i">
-              <img src="{{searchResult.i[0]}}">
-            </ion-thumbnail>-->
+            <ion-thumbnail item-left>
+              <img src="../../assets/icon/user.png">
+            </ion-thumbnail>
           </ion-col>
           <ion-col col-9>
               <h1>{{searchResult._displayName}}</h1>
+              <h3>{{searchResult._email}}</h3>
           </ion-col>
         </ion-row>
       </ion-grid>

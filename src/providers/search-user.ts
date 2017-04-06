@@ -16,13 +16,15 @@ export class SearchUserProvider {
 
   /**
    * getSearchResults
+   * @param searchProperty: string - which attribute of the document to search
+   * @param query: string - the search key
    */
-  public getSearchResults(searchBy: string, query: string): Promise<FirebaseListObservable<any>> {
+  public getSearchResults(searchProperty: string, query: string): Promise<FirebaseListObservable<any>> {
     return new Promise<FirebaseListObservable<any>>((resolve, reject) => {
       if (typeof query !== 'undefined') {
         resolve(this.af.database.list('/user-settings', {
           query: {
-            orderByChild: searchBy,
+            orderByChild: searchProperty,
             equalTo: query 
           }
         }));
