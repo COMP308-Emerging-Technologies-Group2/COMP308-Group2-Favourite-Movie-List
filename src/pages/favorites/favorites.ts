@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
-import { AddMovies } from '../../providers/add-movies';
 import { MovieDetailsPage } from '../../pages/movie-details/movie-details';
 
 // import angularfire 
@@ -25,7 +24,7 @@ export class FavoritesPage {
   public favorites;
   private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public addMovies: AddMovies, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public http: Http) {
     this.movies = [];
 
     this.af.auth.subscribe(auth => this.userId = auth.uid).unsubscribe();
