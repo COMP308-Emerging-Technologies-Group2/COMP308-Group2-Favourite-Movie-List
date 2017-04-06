@@ -63,7 +63,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       // set up device to get push notifications
-      this.oneSignal.startInit('9906cb18-3cc8-4f29-8552-0667c86525a1', '146648244752');
+      this.oneSignal.startInit('9906cb18-3cc8-4f29-8552-0667c86525a1', '755631563317');
       this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
       this.oneSignal.handleNotificationReceived().subscribe(() => {
         alert('you got an alert');
