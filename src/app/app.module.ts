@@ -41,7 +41,7 @@ const firebaseAuthConfig = {
     SearchPage,
     HomePage,
     MovieDetailsPage,
-    FavoritesPage
+    FavoritesPage,
     UserDetailsPage,
     UpdateUserProfilePage
   ],
@@ -58,7 +58,7 @@ const firebaseAuthConfig = {
     SearchPage,
     HomePage,
     MovieDetailsPage,
-    FavoritesPage
+    FavoritesPage,
     UserDetailsPage,
     UpdateUserProfilePage
   ],
@@ -67,7 +67,7 @@ const firebaseAuthConfig = {
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthData,
-    AddMovies
+    AddMovies,
     UserSettingsProvider
   ]
 })
