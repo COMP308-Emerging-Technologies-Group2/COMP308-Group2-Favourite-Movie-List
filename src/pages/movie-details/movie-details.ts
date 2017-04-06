@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 // import angularfire
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 
 @Component({
