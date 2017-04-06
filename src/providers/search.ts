@@ -16,7 +16,7 @@ export class SearchProvider {
    */
   public getSearchResults(query: string): Promise<Array<Object>> {
     return new Promise<Array<Object>>((resolve, reject) => {
-      if (typeof query[0] !== 'undefined') {
+      if (typeof query !== 'undefined' && typeof query[0] !== 'undefined') {
 
         this.http.get(`https://cors-anywhere.herokuapp.com/v2.sg.media-imdb.com/suggests/${query[0].toLowerCase()}/${query}.json`)
           .subscribe(data => resolve(this._parseResponse(data['_body'], query)));
