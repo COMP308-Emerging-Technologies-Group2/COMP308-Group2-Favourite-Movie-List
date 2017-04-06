@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Update Profile
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form *ngIf="profileForm" [formGroup]="profileForm" (submit)="updateUserProfile()" novalidate>
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input formControlName="email" type="email" placeholder="Your email address"
+                 [class.invalid]="!profileForm.controls.email.valid && profileForm.controls.email.dirty">
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message"
+              *ngIf="!profileForm.controls.email.valid  && profileForm.controls.email.dirty">
+      <p>Please enter a valid email.</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Display Name</ion-label>
+      <ion-input formControlName="displayName" type="text" placeholder="Your display name"
+                 [class.invalid]="!profileForm.controls.displayName.valid && profileForm.controls.displayName.dirty">
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message"
+              *ngIf="!profileForm.controls.displayName.valid  && profileForm.controls.displayName.dirty">
+      <p>Please enter a valid display name.</p>
+    </ion-item>
+    <br/>
+    <button ion-button block type="submit">
+      Update Profile
+    </button>
+  </form>
+</ion-content>

@@ -19,7 +19,8 @@
 
     </ion-item>
 
-    <img src="{{media.poster}}">
+    <img *ngIf="posterAvailable" src="{{media.poster}}">
+    <img *ngIf="!posterAvailable" src="../assets/images/posterPlaceholder.png">
 
     <ion-card-content>
       <p>{{media.plot}}</p>

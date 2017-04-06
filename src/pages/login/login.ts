@@ -1,11 +1,11 @@
-import {Component} from "@angular/core";
-import {NavController, AlertController, LoadingController, Loading} from "ionic-angular";
-import {FormBuilder, Validators, FormGroup} from "@angular/forms";
-import {AuthData} from "../../providers/auth-data";
-import {EmailValidator} from "../../validators/email";
-import {ResetPasswordPage} from "../reset-password/reset-password";
-import {RegisterPage} from "../register/register";
-import {HomePage} from "../home/home";
+import { Component } from "@angular/core";
+import { NavController, AlertController, LoadingController, Loading } from "ionic-angular";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { AuthData } from "../../providers/auth-data";
+import { EmailValidator } from "../../validators/email";
+import { ResetPasswordPage } from "../reset-password/reset-password";
+import { RegisterPage } from "../register/register";
+import { HomePage } from "../home/home";
 
 @Component({
   selector: 'page-login',
@@ -16,10 +16,10 @@ export class LoginPage {
   loading: Loading;
 
   constructor(public navCtrl: NavController,
-              public alertCtrl: AlertController,
-              public loadingCtrl: LoadingController,
-              public formBuilder: FormBuilder,
-              public authData: AuthData) {
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public formBuilder: FormBuilder,
+    public authData: AuthData) {
     this.loginForm = formBuilder.group({
       email: ['',
         Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -38,7 +38,13 @@ export class LoginPage {
 
   loginUser() {
     if (!this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      if (this.loginForm.value.email === ""
+        || this.loginForm.value.password === "") {
+        this.alertCtrl.create({
+          message: "Please enter your credentials",
+          buttons: [{ text: 'Ok', role: 'Cancel' }]
+        }).present();
+      }
     } else {
       let email = this.loginForm.value.email;
       let password = this.loginForm.value.password;
@@ -55,7 +61,7 @@ export class LoginPage {
           this.loading.dismiss().then(() => {
             this.alertCtrl.create({
               message: error.message,
-              buttons: [{text: 'Ok', role: 'Cancel'}]
+              buttons: [{ text: 'Ok', role: 'Cancel' }]
             }).present();
           });
         });

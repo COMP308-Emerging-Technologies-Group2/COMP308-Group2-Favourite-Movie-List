@@ -15,6 +15,7 @@ export class MovieDetailsPage {
   public media;
   public favorites: FirebaseListObservable<any>;
   public userId: string;
+  public posterAvailable:boolean = true;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -37,6 +38,10 @@ export class MovieDetailsPage {
         if (data['_episodes']) {
           console.log('there are _episodes');
         }
+        if(data['poster']==='N/A'){
+          this.posterAvailable = false;
+        }
+        console.log('poster:' + this.posterAvailable);
       }
     );
   }

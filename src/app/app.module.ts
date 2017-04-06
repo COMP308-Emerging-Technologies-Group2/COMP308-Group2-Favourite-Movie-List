@@ -13,7 +13,11 @@ import { SearchPage } from '../pages/search/search';
 import { HomePage } from '../pages/home/home';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { AddMovies } from '../providers/add-movies';
- 
+import { UserSettingsProvider } from '../providers/user-settings';
+import { UserDetailsPage } from '../pages/user-details/user-details';
+import { UpdateUserProfilePage } from '../pages/update-user-profile/update-user-profile';
+
+
 // AF2 Settings
 const firebaseConfig = {
   apiKey: "AIzaSyCmsDPLWbEJbwW3vAJ5LRUqCQV-OuYlIU4",
@@ -38,6 +42,8 @@ const firebaseAuthConfig = {
     HomePage,
     MovieDetailsPage,
     FavoritesPage
+    UserDetailsPage,
+    UpdateUserProfilePage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -53,6 +59,8 @@ const firebaseAuthConfig = {
     HomePage,
     MovieDetailsPage,
     FavoritesPage
+    UserDetailsPage,
+    UpdateUserProfilePage
   ],
   providers: [
     StatusBar,
@@ -60,6 +68,7 @@ const firebaseAuthConfig = {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthData,
     AddMovies
+    UserSettingsProvider
   ]
 })
 export class AppModule {
