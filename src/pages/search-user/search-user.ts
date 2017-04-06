@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
-import { Http } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
-// import { MovieDetailsPage } from '../movie-details/movie-details';
 import { SearchUserProvider } from '../../providers/search-user';
-
-// import angularfire 
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Component({
   selector: 'page-search-user',
