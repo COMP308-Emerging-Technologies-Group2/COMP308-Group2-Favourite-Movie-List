@@ -11,8 +11,9 @@ import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { SearchPage } from '../pages/search/search';
 import { HomePage } from '../pages/home/home';
-import {FavoritesPage} from '../pages/favorites/favorites';
-
+import { FavoritesPage } from '../pages/favorites/favorites';
+import { AddMovies } from '../providers/add-movies';
+ 
 // AF2 Settings
 const firebaseConfig = {
   apiKey: "AIzaSyCmsDPLWbEJbwW3vAJ5LRUqCQV-OuYlIU4",
@@ -57,7 +58,8 @@ const firebaseAuthConfig = {
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AuthData
+    AuthData,
+    AddMovies
   ]
 })
 export class AppModule {

@@ -11,50 +11,64 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
   templateUrl: 'movie-details.html'
 })
 export class MovieDetailsPage {
-
   private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
   public media;
   public favorites: FirebaseListObservable<any>;
   public userId: string;
-  public value: FirebaseObjectObservable<any>;
 
-  constructor(public navCtrl: NavController, 
-  public navParams: NavParams, 
-  private http:Http,
-  public af: AngularFire,
-  public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private http: Http,
+    public af: AngularFire,
+    public alertCtrl: AlertController) {
 
-    // This might have to be in the ionViewDidLoad place
     this.af.auth.subscribe(auth => this.userId = auth.uid);
     this.favorites = af.database.list('/users-favorites/' + this.userId);
-    this.value = af.database.object(this.userId);
 
     this.media = {};
 
     let id: string = this.navParams.get('id');
 
-    console.log(id);
-    this.http.get(this.imdbApiUrl+'/id/'+id).map(res => res.json()).subscribe(
+    //console.log(id);
+    this.http.get(this.imdbApiUrl + '/id/' + id).map(res => res.json()).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.media = data;
-        if(data['_episodes']){
+        if (data['_episodes']) {
           console.log('there are _episodes');
         }
       }
     );
   }
 
-  public AddToFavorites() : void {
+  public AddToFavorites(): void {
+    console.log("STARTING ADDTOFAVORITES");
 
-    console.log(this.userId);
-    console.log(this.media.imdbid);
-    
-    this.favorites.push({
-      imdbID: this.media.imdbid,
-      public: true
-    });
+    let check = this.checkIfExists();
+
+    if (check == false) {
+      console.log("ADDED!");
+      this.favorites.push({
+        imdbID: this.media.imdbid,
+        public: true
+      }).then(()=> {console.log("Successfully Added")}).catch(err => console.log(err))
+    }
   }
+
+  public checkIfExists(): any {
+
+    let check: boolean = false;
+    this.favorites.subscribe(data => {
+      data.forEach(element => {
+        console.log("Inside the loop" + element.imdbID);
+        if (element.imdbID == this.media.imdbid) {
+          check = true;
+        }
+      });
+    }).unsubscribe();
+    return check;
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MovieDetailsPage');

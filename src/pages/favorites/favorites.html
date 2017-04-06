@@ -19,11 +19,17 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
   <ion-list>
-    <ion-item *ngFor="let favorite of favorites | async">
-      {{favorite.imdbID}}
+    <ion-item *ngFor="let movie of movies">
+      <ion-thumbnail item-left (click)="viewDetails(movie.imdbid)">
+        <img src="{{movie.poster}}">
+      </ion-thumbnail>
+      <h2 (click)="viewDetails(movie.imdbid)">{{movie.title}}</h2>
+      <p (click)="viewDetails(movie.imdbid)">{{movie._year_data}}</p>
+      <p (click)="viewDetails(movie.imdbid)">{{movie.rating}}</p>
+      <button ion-button item-right color="danger" (click)="deleteMedia(movie.imdbid)">Delete</button>
     </ion-item>
   </ion-list>
 
