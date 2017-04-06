@@ -8,21 +8,22 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-  <ion-list *ngIf="userSettings" no-lines>
-    <ion-item>
-      <ion-avatar item-left>
+  <ion-row *ngIf="userSettings">
+    <ion-col center text-center>
+      <ion-avatar>
         <ion-icon name="contact"></ion-icon>
       </ion-avatar>
-      <h2>{{userSettings.displayName}}</h2>
-      <h3>{{userSettings.email}}</h3>
-    </ion-item>
-    <ion-buttons text-center>
-      <button ion-button icon-right round small (click)="showUpdateUserProfilePage()">
+      <h3>{{userSettings.displayName}}</h3>
+      <h4>{{userSettings.email}}</h4>
+      <br/>
+      <ion-buttons text-center>
+        <button ion-button block icon-right (click)="showUpdateUserProfilePage()">
         Update Profile
         <ion-icon name="create"></ion-icon>
       </button>
-    </ion-buttons>
-  </ion-list>
+      </ion-buttons>
+    </ion-col>
+  </ion-row>
+
 </ion-content>
