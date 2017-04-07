@@ -49,11 +49,19 @@
         <h2>Genres</h2>
         <p text-wrap>{{media.genres}}</p>
       </ion-item>
-
+      <div *ngIf="check==false">
       <button ion-item large icon-left text-center color="primary" (click)="AddToFavorites()">
         <ion-icon name="bookmark"></ion-icon>
         Add to Favourites
       </button>
+      </div>
+
+      <div *ngIf="check==true">
+        <button ion-item large icon-left text-center color="primary" (click)="RemoveFromFavorites()">
+        <ion-icon name="bookmark"></ion-icon>
+        Remove From Favourites
+      </button>
+      </div>
     </ion-card-content>
 
     <ion-row>
