@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Nav } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 // import angularfire
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
@@ -9,7 +10,9 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
   selector: 'page-movie-details',
   templateUrl: 'movie-details.html'
 })
+
 export class MovieDetailsPage {
+  public rootPage: any = HomePage;
   private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
   public media;
   public favorites: FirebaseListObservable<any>;
@@ -58,19 +61,23 @@ export class MovieDetailsPage {
         public: true
       }).then(() => { console.log("Successfully Added") }).catch(err => console.log(err))
     }
+    // Add a Go To Home Section
+    this.navCtrl.setRoot(HomePage);
   }
 
   public RemoveFromFavorites(): void {
-      let key : string = "";
-      //console.log(this.media.imdbid);
-      this.af.database.list('/users-favorites/' + this.userId + '/').subscribe(data => {
-        data.forEach(element => {
-        if(element.imdbID == this.media.imdbid){
+    let key: string = "";
+    //console.log(this.media.imdbid);
+    this.af.database.list('/users-favorites/' + this.userId + '/').subscribe(data => {
+      data.forEach(element => {
+        if (element.imdbID == this.media.imdbid) {
           key = element.$key;
-          this.af.database.list('/users-favorites/' + this.userId + '/').remove(key).then(() => {console.log("Sucessfully Removed")}, err => {console.log(err)});
-        } 
+          this.af.database.list('/users-favorites/' + this.userId + '/').remove(key).then(() => { console.log("Sucessfully Removed") }, err => { console.log(err) });
+        }
       })
-      }).unsubscribe();
+    }).unsubscribe();
+    this.navCtrl.setRoot(HomePage);
+
   }
 
   public checkIfExists(): boolean {
