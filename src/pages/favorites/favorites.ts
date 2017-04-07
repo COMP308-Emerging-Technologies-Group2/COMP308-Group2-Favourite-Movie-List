@@ -27,7 +27,10 @@ export class FavoritesPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public http: Http) {
     this.movies = [];
 
-    this.af.auth.subscribe(auth => this.userId = auth.uid).unsubscribe();
+    // favorites for userId
+    this.userId = this.navParams.get('userId');
+    console.log("UID for Favourites: " + this.userId);
+
     // Getting the value from the database
     this.af.database.list('/users-favorites/' + this.userId + '/').subscribe(data => {
       //console.log(data);
@@ -49,7 +52,7 @@ export class FavoritesPage {
   public viewDetails(id: string) {
     this.navCtrl.push(MovieDetailsPage, {
       'id': id
-    }); 
+    });
   }
 
   public deleteMedia(id: string) {
