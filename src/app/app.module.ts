@@ -10,6 +10,7 @@ import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { SearchPage } from '../pages/search/search';
+import { SearchUserPage } from '../pages/search-user/search-user';
 import { HomePage } from '../pages/home/home';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { UserSettingsProvider } from '../providers/user-settings';
@@ -38,6 +39,7 @@ const firebaseAuthConfig = {
     RegisterPage,
     ResetPasswordPage,
     SearchPage,
+    SearchUserPage,
     HomePage,
     MovieDetailsPage,
     FavoritesPage,
@@ -55,6 +57,7 @@ const firebaseAuthConfig = {
     RegisterPage,
     ResetPasswordPage,
     SearchPage,
+    SearchUserPage,
     HomePage,
     MovieDetailsPage,
     FavoritesPage,
