@@ -4,6 +4,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {HomePage} from '../pages/home/home';
 import {SearchPage} from '../pages/search/search';
+import {SearchUserPage} from '../pages/search-user/search-user';
 import {AngularFire} from 'angularfire2';
 import {LoginPage} from '../pages/login/login';
 import {UserDetailsPage} from '../pages/user-details/user-details';
@@ -31,6 +32,7 @@ export class MyApp {
 
       { title: 'Home', component: HomePage },
       {title: 'Search', component: SearchPage},
+      {title: 'Search Users', component: SearchUserPage},
       {title: 'My Profile', component: UserDetailsPage},
       {title: 'Logout', component: LoginPage}
 
