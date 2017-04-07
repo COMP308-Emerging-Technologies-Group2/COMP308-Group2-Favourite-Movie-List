@@ -1,0 +1,43 @@
+<!--friends list-->
+
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Friends</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <!-- just for testing! -->
+  <button ion-item large icon-left text-center color="primary" (click)="AddFriend('123@123.com')">
+      <ion-icon name="bookmark"></ion-icon>
+      Add Friend Example
+  </button>
+
+  <div *ngIf="friends">
+  <ion-list>
+    <button text-wrap ion-item *ngFor="let friend of friends" (click)="AddFriend('124@124.com')" >
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+            <ion-thumbnail item-left>
+              <img src="../../assets/icon/user.png">
+            </ion-thumbnail>
+          </ion-col>
+          <ion-col col-9>
+              <h1>{{friend._email}}</h1>
+              <h3>{{friend._email}}</h3>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </button>
+  </ion-list>
+  </div>
+
+</ion-content>

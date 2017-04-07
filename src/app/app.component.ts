@@ -8,6 +8,7 @@ import {SearchUserPage} from '../pages/search-user/search-user';
 import {AngularFire} from 'angularfire2';
 import {LoginPage} from '../pages/login/login';
 import {FavoritesPage} from '../pages/favorites/favorites';
+import {FriendsListPage} from '../pages/friends-list/friends-list';
 import {UserDetailsPage} from '../pages/user-details/user-details';
 import {AuthData} from '../providers/auth-data';
 
@@ -33,6 +34,7 @@ export class MyApp {
 
       { title: 'Home', component: HomePage },
       { title: 'Favorites', component : FavoritesPage},
+      {title: 'Friends', component: FriendsListPage},
       {title: 'Search', component: SearchPage},
       {title: 'Search Users', component: SearchUserPage},
       {title: 'My Profile', component: UserDetailsPage},
