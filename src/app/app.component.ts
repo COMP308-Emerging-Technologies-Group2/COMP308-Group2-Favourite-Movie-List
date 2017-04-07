@@ -8,6 +8,7 @@ import { SearchPage } from '../pages/search/search';
 import { AngularFire } from 'angularfire2';
 import { LoginPage } from '../pages/login/login';
 import { UserDetailsPage } from '../pages/user-details/user-details';
+import { SearchUserPage } from "../pages/search-user/search-user";
 import { AuthData } from '../providers/auth-data';
 
 
@@ -35,6 +36,7 @@ export class MyApp {
 
       { title: 'Home', component: HomePage },
       { title: 'Search', component: SearchPage },
+      { title: 'Search Users', component: SearchUserPage },
       { title: 'My Profile', component: UserDetailsPage },
       { title: 'Logout', component: LoginPage }
 
@@ -43,9 +45,9 @@ export class MyApp {
     const authObserver = af.auth.subscribe(user => {
       if (user) {
         // send firebase userId to push server
-        this.oneSignal.sendTag('fbuid',user.uid);
-        console.log('sent id: '+user.uid);
-        
+        this.oneSignal.sendTag('fbuid', user.uid);
+        console.log('sent id: ' + user.uid);
+
         this.oneSignal.endInit();
         this.rootPage = HomePage;
         authObserver.unsubscribe();

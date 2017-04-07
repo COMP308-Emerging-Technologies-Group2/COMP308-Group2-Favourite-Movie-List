@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Search Users</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-searchbar type="search" (ionInput)="searchEvent($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
+  <div *ngIf="searchResults">
+    <ion-list>
+      <button text-wrap ion-item *ngFor="let searchResult of searchResults" (click)="viewDetails(searchResult.id)">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+            <ion-thumbnail item-left>
+              <img src="../../assets/images/user.png">
+            </ion-thumbnail>
+          </ion-col>
+          <ion-col col-9>
+              <h1>{{searchResult._displayName}}</h1>
+              <h3>{{searchResult._email}}</h3>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </button>
+    </ion-list>
+  </div>
+
+  <!-- Empty search results message -->
+  <div *ngIf="searchResults.length === 0 && query!==''" padding>
+    <h2>No results found for {{query}}</h2>
+  </div>
+
+</ion-content>
