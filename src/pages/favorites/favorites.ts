@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
-import { AddMovies } from '../../providers/add-movies';
 import { MovieDetailsPage } from '../../pages/movie-details/movie-details';
 
 // import angularfire 
@@ -25,7 +24,7 @@ export class FavoritesPage {
   public favorites;
   private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public addMovies: AddMovies, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public http: Http) {
     this.movies = [];
 
     this.af.auth.subscribe(auth => this.userId = auth.uid).unsubscribe();
@@ -39,36 +38,31 @@ export class FavoritesPage {
           //console.log(movieData);
           if (movieData != null) {
             this.movies.push(movieData);
-            //console.log(this.movies);
+            // Sorting the favorites list
+            this.movies.sort((a, b) => { return a['imdbid'].localeCompare(b['imdbid']) });
           }
         })
       })
-    },
-      err => console.log(err),
-      () => {
-        console.log("Hello");
-        this.movies.sort((a, b) => { return a['imdbid'].localCompare(b['imdbid']) });
-      }
-    )
+    });
   }
 
   public viewDetails(id: string) {
     this.navCtrl.push(MovieDetailsPage, {
       'id': id
-    });
+    }); 
   }
 
   public deleteMedia(id: string) {
     this.movies = [];
-    let key : string = "";
+    let key: string = "";
     console.log(id);
     this.af.database.list('/users-favorites/' + this.userId + '/').subscribe(data => {
       //console.log(data);
       data.forEach(element => {
-        if(element.imdbID == id){
+        if (element.imdbID == id) {
           key = element.$key;
-          this.af.database.list('/users-favorites/' + this.userId + '/').remove(key).then(() => {console.log("Sucessfully Removed")}, err => {console.log(err)});
-        } 
+          this.af.database.list('/users-favorites/' + this.userId + '/').remove(key).then(() => { console.log("Sucessfully Removed") }, err => { console.log(err) });
+        }
       })
     }).unsubscribe();
   }
