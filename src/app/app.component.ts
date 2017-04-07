@@ -86,10 +86,13 @@ export class MyApp {
     if (page.title === 'Logout') {
       this.af.auth.logout();
     }
-
-    if (page.title === 'My Profile') {
+    else if (page.title === 'Favorites') {
       this.nav.setRoot(page.component, { userId: this.authData.authState.uid });
-    } else {
+    }
+    else if (page.title === 'My Profile') {
+      this.nav.setRoot(page.component, { userId: this.authData.authState.uid });
+    }
+    else {
       this.nav.setRoot(page.component);
     }
   }

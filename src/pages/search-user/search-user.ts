@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SearchUserProvider } from '../../providers/search-user';
+import { FavoritesPage } from '../favorites/favorites';
 
 @Component({
   selector: 'page-search-user',
@@ -53,8 +54,6 @@ export class SearchUserPage {
             data.forEach(obj => {
               console.log(obj);
               this.searchResults.push(obj);
-              console.log(this.searchResults.length);
-
             })
           })
         }
@@ -76,17 +75,9 @@ export class SearchUserPage {
     this.searchResults = new Array<Object>();
   }
 
-  /**
-   * Push to details page
-   * 
-   * @param {string} id 
-   * 
-   * @memberOf SearchPage
-   */
-  // public viewDetails(id: string) {
-  //   this.navCtrl.push(MovieDetailsPage, {
-  //     'id': id
-  //   });
-  // }
+  viewDetails(userIdParam: string) {
+    console.log("User Id: " + userIdParam);
+    this.navCtrl.push(FavoritesPage, { userId: userIdParam });
+  }
 
 }
