@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
-import {UserSettingsModel} from "../../models/user-settings";
-import {UserSettingsProvider} from "../../providers/user-settings";
-import {Loading, LoadingController, NavParams, NavController} from "ionic-angular";
-import {UpdateUserProfilePage} from "../update-user-profile/update-user-profile";
+import { Component } from "@angular/core";
+import { UserSettingsModel } from "../../models/user-settings";
+import { UserSettingsProvider } from "../../providers/user-settings";
+import { Loading, LoadingController, NavParams, NavController } from "ionic-angular";
+import { UpdateUserProfilePage } from "../update-user-profile/update-user-profile";
 
 @Component({
   selector: 'page-user-details',
@@ -13,13 +13,13 @@ export class UserDetailsPage {
   userSettings: UserSettingsModel;
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public loadingCtrl: LoadingController,
-              public us: UserSettingsProvider) {
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public us: UserSettingsProvider) {
   }
 
   ionViewDidEnter() {
-    this.loading = this.loadingCtrl.create({content: 'Getting user\'s data...'});
+    this.loading = this.loadingCtrl.create({ content: 'Getting user\'s data...' });
 
     const userId = this.navParams.get('userId');
 
@@ -33,8 +33,9 @@ export class UserDetailsPage {
               this.userSettings[property.substr(1, property.length)] = userSettings[property];
             }
           }
-
-          subscription.unsubscribe();
+          if (subscription !== undefined) {
+            subscription.unsubscribe();
+          }
           this.loading.dismiss();
         });
       } else {
@@ -44,6 +45,7 @@ export class UserDetailsPage {
   }
 
   showUpdateUserProfilePage() {
-    this.navCtrl.push(UpdateUserProfilePage, {userId: this.navParams.get('userId')});
+    this.navCtrl.push(UpdateUserProfilePage, { userId: this.navParams.get('userId') });
   }
+
 }

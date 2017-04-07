@@ -11,13 +11,13 @@
 <ion-content>
   <ion-searchbar type="search" (ionInput)="searchEvent($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
   <div *ngIf="searchResults">
-  <ion-list>
-    <button text-wrap ion-item *ngFor="let searchResult of searchResults" (click)="viewDetails(searchResult.id)" >
+    <ion-list>
+      <button text-wrap ion-item *ngFor="let searchResult of searchResults" (click)="viewDetails(searchResult.$key)">
       <ion-grid>
         <ion-row>
           <ion-col col-3>
             <ion-thumbnail item-left>
-              <img src="../../assets/icon/user.png">
+              <img src="../../assets/images/user.png">
             </ion-thumbnail>
           </ion-col>
           <ion-col col-9>
@@ -27,9 +27,13 @@
         </ion-row>
       </ion-grid>
     </button>
-  </ion-list>
+
+    </ion-list>
   </div>
-  <div *ngIf="!searchResults" padding>
-    <h2>No results found</h2>
+
+  <!-- Empty search results message -->
+  <div *ngIf="searchResults.length === 0 && query!==''" padding>
+    <h2>No results found for {{query}}</h2>
   </div>
+
 </ion-content>

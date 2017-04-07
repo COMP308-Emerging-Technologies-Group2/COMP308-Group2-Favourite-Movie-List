@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SearchUserProvider } from '../../providers/search-user';
+import { FavoritesPage } from '../favorites/favorites';
 
 @Component({
   selector: 'page-search-user',
@@ -11,6 +12,8 @@ export class SearchUserPage {
 
   public searchResults: Array<any>;
   public searchProperties: Array<string>;
+  private query: string = "";
+
   /**
    * 
    * @param navCtrl 
@@ -39,24 +42,24 @@ export class SearchUserPage {
    */
   public searchEvent(event): void {
 
-    let query: string = event.target.value;
+    this.query = event.target.value;
     this.searchResults.length = 0; //empty array
 
     // unfortunately, firebase doesn't do search functions
     // so I'm looping through all search properties
     // and putting all objects in an array
-    this.searchProperties.forEach(searchProperty => 
-      this.search.getSearchResults(searchProperty, query).then(value => {
+
+    this.searchProperties.forEach(searchProperty =>
+      this.search.getSearchResults(searchProperty, this.query).then(value => {
         if (typeof value !== 'undefined') {
           value.subscribe(data => {
             data.forEach(obj => {
               console.log(obj);
               this.searchResults.push(obj);
-              console.log (this.searchResults.length);
             })
           })
         }
-    }));
+      }));
     // console.log (this.searchResults.length);
     // this.searchResults.forEach(member => {
     //   console.log(member);
@@ -71,20 +74,13 @@ export class SearchUserPage {
    * @memberOf SearchPage
    */
   public onCancel(): void {
-    this.searchResults = new Array<Object>(); 
-   }
+    this.searchResults = new Array<Object>();
+  }
 
-  /**
-   * Push to details page
-   * 
-   * @param {string} id 
-   * 
-   * @memberOf SearchPage
-   */
-  // public viewDetails(id: string) {
-  //   this.navCtrl.push(MovieDetailsPage, {
-  //     'id': id
-  //   });
-  // }
+  viewDetails(userIdParam: string) {
+    console.log("User Id: " + userIdParam);
+    this.navCtrl.push(FavoritesPage, { userId: userIdParam });
+  }
+
 
 }

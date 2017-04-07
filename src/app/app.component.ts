@@ -1,33 +1,36 @@
-import {Component, ViewChild} from '@angular/core';
-import {Nav, Platform} from 'ionic-angular';
-import {StatusBar} from '@ionic-native/status-bar';
-import {SplashScreen} from '@ionic-native/splash-screen';
-import {HomePage} from '../pages/home/home';
-import {SearchPage} from '../pages/search/search';
-import {SearchUserPage} from '../pages/search-user/search-user';
-import {AngularFire} from 'angularfire2';
-import {LoginPage} from '../pages/login/login';
-import {FavoritesPage} from '../pages/favorites/favorites';
-import {FriendsListPage} from '../pages/friends-list/friends-list';
-import {UserDetailsPage} from '../pages/user-details/user-details';
-import {AuthData} from '../providers/auth-data';
-
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { HomePage } from '../pages/home/home';
+import { SearchPage } from '../pages/search/search';
+import { AngularFire } from 'angularfire2';
+import { LoginPage } from '../pages/login/login';
+import { FavoritesPage } from '../pages/favorites/favorites';
+import { FriendsListPage } from '../pages/friends-list/friends-list';
+import { UserDetailsPage } from '../pages/user-details/user-details';
+import { SearchUserPage } from "../pages/search-user/search-user";
+import { AuthData } from '../providers/auth-data';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [OneSignal]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform,
-              public statusBar: StatusBar,
-              public splashScreen: SplashScreen,
-              public af: AngularFire,
-              public authData: AuthData) {
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public af: AngularFire,
+    public authData: AuthData,
+    public oneSignal: OneSignal
+  ) {
     this.initializeApp();
 
     this.pages = [
@@ -39,11 +42,16 @@ export class MyApp {
       {title: 'Search Users', component: SearchUserPage},
       {title: 'My Profile', component: UserDetailsPage},
       {title: 'Logout', component: LoginPage}
-
+      
     ];
 
     const authObserver = af.auth.subscribe(user => {
       if (user) {
+        // send firebase userId to push server
+        this.oneSignal.sendTag('fbuid', user.uid);
+        console.log('sent id: ' + user.uid);
+
+        this.oneSignal.endInit();
         this.rootPage = HomePage;
         authObserver.unsubscribe();
       } else {
@@ -59,6 +67,17 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      // set up device to get push notifications
+      this.oneSignal.startInit('9906cb18-3cc8-4f29-8552-0667c86525a1', '755631563317');
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+      this.oneSignal.handleNotificationReceived().subscribe(() => {
+        alert('you got an alert');
+      });
+
+      this.oneSignal.handleNotificationOpened().subscribe(() => {
+        alert('you opened from an alert');
+      });
+
     });
   }
 
@@ -68,10 +87,13 @@ export class MyApp {
     if (page.title === 'Logout') {
       this.af.auth.logout();
     }
-
-    if (page.title === 'My Profile') {
-      this.nav.setRoot(page.component, {userId: this.authData.authState.uid});
-    } else {
+    else if (page.title === 'Favorites') {
+      this.nav.setRoot(page.component, { userId: this.authData.authState.uid });
+    }
+    else if (page.title === 'My Profile') {
+      this.nav.setRoot(page.component, { userId: this.authData.authState.uid });
+    }
+    else {
       this.nav.setRoot(page.component);
     }
   }
