@@ -3,6 +3,9 @@ import { NavController, NavParams } from 'ionic-angular';
 import { SearchUserProvider } from '../../providers/search-user';
 import { FavoritesPage } from '../favorites/favorites';
 
+// import angularfire
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+
 @Component({
   selector: 'page-search-user',
   templateUrl: 'search-user.html',
@@ -13,6 +16,8 @@ export class SearchUserPage {
   public searchResults: Array<any>;
   public searchProperties: Array<string>;
   private query: string = "";
+  public userId: string;
+  public friends: FirebaseListObservable<any>;
   /**
    * 
    * @param navCtrl 
@@ -24,10 +29,14 @@ export class SearchUserPage {
     private navCtrl: NavController,
     private navParams: NavParams,
     // private http: Http,
-    private search: SearchUserProvider
+    private search: SearchUserProvider,
+    private af:AngularFire
   ) {
     this.searchResults = new Array<any>();
-    this.searchProperties = ['_displayName', '_email']
+    this.searchProperties = ['_displayName', '_email'];
+    this.af.auth.subscribe(auth => this.userId = auth.uid).unsubscribe();
+    this.friends = af.database.list('/users-favorites/' + this.userId);
+
   }
 
   ionViewDidLoad() { console.log('ionViewDidLoad SearchPage'); }
@@ -75,9 +84,13 @@ export class SearchUserPage {
     this.searchResults = new Array<Object>();
   }
 
-  viewDetails(userIdParam: string) {
-    console.log("User Id: " + userIdParam);
-    this.navCtrl.push(FavoritesPage, { userId: userIdParam });
+  viewDetails(searchResult:any) {
+    console.log("User Id: " + searchResult.$key);
+    this.navCtrl.push(FavoritesPage, { userId: searchResult.$key });
   }
 
+  addFriend(searchResult:any){
+    console.log("UserId to Add" + searchResult.$key);
+
+  }
 }
