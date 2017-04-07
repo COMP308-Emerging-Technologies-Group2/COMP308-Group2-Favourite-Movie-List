@@ -12,7 +12,7 @@
   <ion-searchbar type="search" (ionInput)="searchEvent($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
   <div *ngIf="searchResults">
     <ion-list>
-      <button text-wrap ion-item *ngFor="let searchResult of searchResults" (click)="viewDetails(searchResult.id)">
+      <button text-wrap ion-item *ngFor="let searchResult of searchResults" (click)="viewDetails(searchResult.$key)">
       <ion-grid>
         <ion-row>
           <ion-col col-3>

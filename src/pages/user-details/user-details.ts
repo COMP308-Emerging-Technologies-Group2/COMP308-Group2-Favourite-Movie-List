@@ -4,9 +4,6 @@ import { UserSettingsProvider } from "../../providers/user-settings";
 import { Loading, LoadingController, NavParams, NavController } from "ionic-angular";
 import { UpdateUserProfilePage } from "../update-user-profile/update-user-profile";
 
-// !!! Move to friend's list page
-import { FavoritesPage } from "../favorites/favorites"
-
 @Component({
   selector: 'page-user-details',
   templateUrl: 'user-details.html'
@@ -51,8 +48,4 @@ export class UserDetailsPage {
     this.navCtrl.push(UpdateUserProfilePage, { userId: this.navParams.get('userId') });
   }
 
-  // !!! Move to friend's list page
-  showFriendsFavorites(userIdParam: string) {
-    this.navCtrl.push(FavoritesPage, {userId: userIdParam});
-  }
 }
