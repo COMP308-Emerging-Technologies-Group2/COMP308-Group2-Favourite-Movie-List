@@ -4,9 +4,7 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
-
 import { AuthData } from '../providers/auth-data';
-
 import { MovieDetailsPage } from '../pages/movie-details/movie-details';
 import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
@@ -14,9 +12,11 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { SearchPage } from '../pages/search/search';
 import { SearchUserPage } from '../pages/search-user/search-user';
 import { HomePage } from '../pages/home/home';
+import { FavoritesPage } from '../pages/favorites/favorites';
 import { UserSettingsProvider } from '../providers/user-settings';
 import { UserDetailsPage } from '../pages/user-details/user-details';
 import { UpdateUserProfilePage } from '../pages/update-user-profile/update-user-profile';
+
 
 // AF2 Settings
 const firebaseConfig = {
@@ -42,6 +42,7 @@ const firebaseAuthConfig = {
     SearchUserPage,
     HomePage,
     MovieDetailsPage,
+    FavoritesPage,
     UserDetailsPage,
     UpdateUserProfilePage
   ],
@@ -59,6 +60,7 @@ const firebaseAuthConfig = {
     SearchUserPage,
     HomePage,
     MovieDetailsPage,
+    FavoritesPage,
     UserDetailsPage,
     UpdateUserProfilePage
   ],

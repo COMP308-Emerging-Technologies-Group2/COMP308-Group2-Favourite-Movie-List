@@ -1,16 +1,17 @@
+
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
-import { OneSignal } from '@ionic-native/onesignal';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { SearchPage } from '../pages/search/search';
 import { AngularFire } from 'angularfire2';
 import { LoginPage } from '../pages/login/login';
+import { FavoritesPage } from '../pages/favorites/favorites';
 import { UserDetailsPage } from '../pages/user-details/user-details';
 import { SearchUserPage } from "../pages/search-user/search-user";
 import { AuthData } from '../providers/auth-data';
-
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   templateUrl: 'app.html',
@@ -35,6 +36,11 @@ export class MyApp {
     this.pages = [
 
       { title: 'Home', component: HomePage },
+      { title: 'Favorites', component: FavoritesPage },
+      { title: 'Search', component: SearchPage },
+      { title: 'Search Users', component: SearchUserPage },
+      { title: 'My Profile', component: UserDetailsPage },
+      { title: 'Logout', component: LoginPage },
       { title: 'Search', component: SearchPage },
       { title: 'Search Users', component: SearchUserPage },
       { title: 'My Profile', component: UserDetailsPage },
