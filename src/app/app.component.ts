@@ -40,10 +40,6 @@ export class MyApp {
       { title: 'Search', component: SearchPage },
       { title: 'Search Users', component: SearchUserPage },
       { title: 'My Profile', component: UserDetailsPage },
-      { title: 'Logout', component: LoginPage },
-      { title: 'Search', component: SearchPage },
-      { title: 'Search Users', component: SearchUserPage },
-      { title: 'My Profile', component: UserDetailsPage },
       { title: 'Logout', component: LoginPage }
 
     ];
