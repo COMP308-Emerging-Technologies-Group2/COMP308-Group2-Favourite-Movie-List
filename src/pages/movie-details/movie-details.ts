@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams, AlertController, Nav } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
 // import angularfire
