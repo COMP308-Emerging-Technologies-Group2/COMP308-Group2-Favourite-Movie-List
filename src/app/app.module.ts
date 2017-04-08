@@ -13,6 +13,7 @@ import { SearchPage } from '../pages/search/search';
 import { SearchUserPage } from '../pages/search-user/search-user';
 import { HomePage } from '../pages/home/home';
 import { FavoritesPage } from '../pages/favorites/favorites';
+import { FriendsListPage } from '../pages/friends-list/friends-list';
 import { UserSettingsProvider } from '../providers/user-settings';
 import { UserDetailsPage } from '../pages/user-details/user-details';
 import { UpdateUserProfilePage } from '../pages/update-user-profile/update-user-profile';
@@ -43,6 +44,7 @@ const firebaseAuthConfig = {
     HomePage,
     MovieDetailsPage,
     FavoritesPage,
+    FriendsListPage,
     UserDetailsPage,
     UpdateUserProfilePage
   ],
@@ -61,6 +63,7 @@ const firebaseAuthConfig = {
     HomePage,
     MovieDetailsPage,
     FavoritesPage,
+    FriendsListPage,
     UserDetailsPage,
     UpdateUserProfilePage
   ],
