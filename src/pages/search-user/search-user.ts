@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { SearchUserProvider } from '../../providers/search-user';
 import { FavoritesPage } from '../favorites/favorites';
-
+import { FriendsListPage } from '../friends-list/friends-list';
 // import angularfire
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Component({
   selector: 'page-search-user',
-  templateUrl: 'search-user.html'
+  templateUrl: 'search-user.html',
+  providers: [SearchUserProvider]
 })
 export class SearchUserPage {
 
@@ -26,7 +28,9 @@ export class SearchUserPage {
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
-    private af:AngularFire
+    // private http: Http,
+    private search: SearchUserProvider,
+    private af: AngularFire
   ) {
     this.searchResults = new Array<any>();
     this.searchProperties = ['_displayName', '_email'];
@@ -81,12 +85,12 @@ export class SearchUserPage {
     this.searchResults = new Array<Object>();
   }
 
-  viewDetails(searchResult:any) {
+  viewDetails(searchResult: any) {
     console.log("User Id: " + searchResult.$key);
     this.navCtrl.push(FavoritesPage, { userId: searchResult.$key });
   }
 
-  addFriend(searchResult:any){
+  addFriend(searchResult: any) {
     console.log("UserId to Add" + searchResult.$key);
 
     let check = this.checkIfExists(searchResult.$key);
@@ -94,7 +98,10 @@ export class SearchUserPage {
     if (check == false) {
       this.friendsList.push({
         friendId: searchResult.$key
-      }).then(() => { console.log("Successfully Added") }).catch(err => console.log(err))
+      }).then(() => {
+        console.log("Successfully Added")
+      }).catch(err => console.log(err));
+      this.navCtrl.push(FriendsListPage);
     }
 
   }
@@ -105,7 +112,7 @@ export class SearchUserPage {
     this.friendsList.subscribe(data => {
       data.forEach(friend => {
         console.log(friend.$key);
-        if (friend.$key== friendId) {
+        if (friend.$key == friendId) {
           check = true;
         }
       });

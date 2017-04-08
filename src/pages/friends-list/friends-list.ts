@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { SearchUserProvider } from '../../providers/search-user';
 import { FavoritesPage } from '../favorites/favorites';
 // import angularfire 
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
@@ -13,12 +12,12 @@ export class FriendsListPage {
   public friendsList: FirebaseListObservable<any>;
   public friends: Array<any>;
   public userId: string;
-  
+
   // private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
-  
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
-    
+
     // authenication
     this.af.auth.subscribe(auth => this.userId = auth.uid).unsubscribe();
 
@@ -29,14 +28,17 @@ export class FriendsListPage {
     this.friends = new Array<any>();
 
     this.friendsList.subscribe(data => {
-      //console.log(data);
       data.forEach(friend => {
-        this.friends.push(friend);
-      })
+        console.log("id::: " + friend.friendId);
+        let friendData = this.af.database.object('/user-settings/' + friend.friendId);
+        friendData.forEach(f => {
+          this.friends.push(f);
+        });
+      });
     });
   }
 
-// Note: AddFriend takes an email address.
+  // Note: AddFriend takes an email address.
   public AddFriend(email: string) {
     console.log("add friend method called");
 
@@ -49,7 +51,7 @@ export class FriendsListPage {
     }
   }
 
-// Note: RemoveFriend takes an email address.
+  // Note: RemoveFriend takes an email address.
   public RemoveFriend(email: string) {
     console.log("delete friend method called");
 
@@ -65,7 +67,7 @@ export class FriendsListPage {
     this.friendsList.remove(key).then(() => { console.log("Sucessfully Removed") }, err => { console.log(err) });
   }
 
-// method to check if a user already has a friend
+  // method to check if a user already has a friend
   public CheckIfExists(email: string): boolean {
     let check: boolean = false;
     this.friendsList.subscribe(data => {
@@ -79,9 +81,9 @@ export class FriendsListPage {
     return check;
   }
 
-    viewDetails(friend:any) {
-    console.log("User Id: " + friend.friendId);
-    this.navCtrl.push(FavoritesPage, { userId: friend.friendId });
+  viewDetails(friendInfo: any) {
+    console.log("User Id: " + friendInfo.$key);
+    this.navCtrl.push(FavoritesPage, { userId: friendInfo.$key });
   }
 
   ionViewDidLoad() {
