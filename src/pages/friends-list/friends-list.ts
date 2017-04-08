@@ -26,7 +26,7 @@ export class FriendsListPage {
 
     // initialize friends
     this.friends = new Array<any>();
-
+    this.friends = [];
     this.friendsList.subscribe(data => {
       data.forEach(friend => {
         console.log("id::: " + friend.friendId);
@@ -52,13 +52,14 @@ export class FriendsListPage {
   }
 
   // Note: RemoveFriend takes an email address.
-  public RemoveFriend(email: string) {
+  public removeFriend(f: any) {
+    this.friends = [];
     console.log("delete friend method called");
 
     let key: string = "";
     this.friendsList.subscribe(data => {
       data.forEach(friend => {
-        if (friend._email == email) {
+        if (friend.friendId == f.$key) {
           key = friend.$key;
         }
       })
