@@ -12,22 +12,14 @@
   <ion-searchbar type="search" (ionInput)="searchEvent($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
   <div *ngIf="searchResults">
     <ion-list>
-      <button text-wrap ion-item *ngFor="let searchResult of searchResults" (click)="viewDetails(searchResult.$key)">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-3>
-            <ion-thumbnail item-left>
-              <img src="../../assets/images/user.png">
-            </ion-thumbnail>
-          </ion-col>
-          <ion-col col-9>
-              <h1>{{searchResult._displayName}}</h1>
-              <h3>{{searchResult._email}}</h3>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </button>
-
+      <ion-item *ngFor="let searchResult of searchResults">
+        <ion-thumbnail item-left (click)="viewDetails(searchResult)">
+          <img src="../../assets/images/user.png">
+        </ion-thumbnail>
+        <h1>{{searchResult._displayName}}</h1>
+        <h3>{{searchResult._email}}</h3>
+        <button ion-button item-right (click)="addFriend(searchResult)">Add</button>
+      </ion-item>
     </ion-list>
   </div>
 
