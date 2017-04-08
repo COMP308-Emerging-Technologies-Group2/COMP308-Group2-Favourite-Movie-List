@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SearchUserProvider } from '../../providers/search-user';
-
+import { FavoritesPage } from '../favorites/favorites';
 // import angularfire 
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
@@ -13,7 +13,6 @@ export class FriendsListPage {
   public friendsList: FirebaseListObservable<any>;
   public friends: Array<any>;
   public userId: string;
-  private search: SearchUserProvider;
   
   // private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
   
@@ -33,7 +32,6 @@ export class FriendsListPage {
       //console.log(data);
       data.forEach(friend => {
         this.friends.push(friend);
-        console.log(friend._email);
       })
     });
   }
@@ -79,6 +77,11 @@ export class FriendsListPage {
       });
     });
     return check;
+  }
+
+    viewDetails(friend:any) {
+    console.log("User Id: " + friend.friendId);
+    this.navCtrl.push(FavoritesPage, { userId: friend.friendId });
   }
 
   ionViewDidLoad() {

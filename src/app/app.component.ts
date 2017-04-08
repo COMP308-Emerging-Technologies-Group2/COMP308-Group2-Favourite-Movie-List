@@ -7,11 +7,7 @@ import { SearchPage } from '../pages/search/search';
 import { AngularFire } from 'angularfire2';
 import { LoginPage } from '../pages/login/login';
 import { FavoritesPage } from '../pages/favorites/favorites';
-<<<<<<< HEAD
 import { FriendsListPage } from '../pages/friends-list/friends-list';
-=======
-import { FriendsPage } from '../pages/friends/friends';
->>>>>>> feature/friend-list
 import { UserDetailsPage } from '../pages/user-details/user-details';
 import { SearchUserPage } from "../pages/search-user/search-user";
 import { AuthData } from '../providers/auth-data';
