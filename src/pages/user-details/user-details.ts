@@ -33,7 +33,7 @@ export class UserDetailsPage {
               this.userSettings[property.substr(1, property.length)] = userSettings[property];
             }
           }
-          if (subscription !== undefined) {
+          if (subscription) {
             subscription.unsubscribe();
           }
           this.loading.dismiss();

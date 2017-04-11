@@ -45,7 +45,9 @@ export class UpdateUserProfilePage {
             displayName: [this.userSettings.displayName, Validators.compose([Validators.required])]
           });
 
-          subscription.unsubscribe();
+          if (subscription) {
+            subscription.unsubscribe();
+          }
           this.loading.dismiss();
         });
       } else {
