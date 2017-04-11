@@ -87,7 +87,8 @@ export class MyApp {
     if (page.title === 'Logout') {
       this.af.auth.logout();
     }
-    else if (page.title === 'Favorites') {
+
+    if (page.title === 'Favorites') {
       this.nav.setRoot(page.component, { userId: this.authData.authState.uid });
     }
     else if (page.title === 'My Profile') {
