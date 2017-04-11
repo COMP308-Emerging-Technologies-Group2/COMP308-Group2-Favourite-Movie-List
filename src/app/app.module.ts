@@ -1,5 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { OneSignal } from '@ionic-native/onesignal';
+
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -72,7 +74,8 @@ const firebaseAuthConfig = {
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthData,
-    UserSettingsProvider
+    UserSettingsProvider,
+    OneSignal
   ]
 })
 export class AppModule {
