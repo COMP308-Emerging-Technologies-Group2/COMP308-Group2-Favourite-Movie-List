@@ -94,6 +94,7 @@ export class SearchUserPage {
     console.log("UserId to Add" + searchResult.$key);
 
     let check = this.checkIfExists(searchResult.$key);
+    console.log("user exists? => "+check);
 
     if (check == false) {
       this.friendsList.push({
@@ -111,8 +112,8 @@ export class SearchUserPage {
     let check: boolean = false;
     this.friendsList.subscribe(data => {
       data.forEach(friend => {
-        console.log(friend.$key);
-        if (friend.$key == friendId) {
+        console.log("comparing " + friend.friendId + " and " + friendId);
+        if (friend.friendId == friendId) {
           check = true;
         }
       });
