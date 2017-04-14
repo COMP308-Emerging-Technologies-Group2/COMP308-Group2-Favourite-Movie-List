@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { AuthData } from '../../providers/auth-data';
 import { HomePage } from '../home/home';
+import { FavoritesPage } from '../favorites/favorites';
 
 // import angularfire
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
@@ -22,6 +24,7 @@ export class MovieDetailsPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    private authData: AuthData,
     private http: Http,
     public af: AngularFire,
     public alertCtrl: AlertController) {
@@ -62,7 +65,7 @@ export class MovieDetailsPage {
       }).then(() => { console.log("Successfully Added") }).catch(err => console.log(err))
     }
     // Add a Go To Home Section
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.setRoot(FavoritesPage, { userId: this.authData.authState.uid });
   }
 
   public RemoveFromFavorites(): void {

@@ -22,7 +22,7 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{ title: string, component: any }>;
+  pages: Array<{ title: string, icon: string, component: any }>;
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
@@ -35,13 +35,13 @@ export class MyApp {
 
     this.pages = [
 
-      { title: 'Home', component: HomePage },
-      { title: 'Favorites', component: FavoritesPage },
-      { title: 'Friends', component: FriendsListPage },
-      { title: 'Search', component: SearchPage },
-      { title: 'Search Users', component: SearchUserPage },
-      { title: 'My Profile', component: UserDetailsPage },
-      { title: 'Logout', component: LoginPage }
+      { title: 'Home', icon: 'browsers', component: HomePage },
+      { title: 'Favorites', icon: 'star', component: FavoritesPage },
+      { title: 'Search', icon: 'videocam', component: SearchPage },
+      { title: 'Friends', icon: 'people', component: FriendsListPage },
+      { title: 'Add Friends', icon: 'person-add', component: SearchUserPage },
+      { title: 'Profile', icon: 'person', component: UserDetailsPage },
+      { title: 'Logout', icon: 'exit', component: LoginPage }
 
     ];
 
@@ -91,7 +91,7 @@ export class MyApp {
     if (page.title === 'Favorites') {
       this.nav.setRoot(page.component, { userId: this.authData.authState.uid });
     }
-    else if (page.title === 'My Profile') {
+    else if (page.title === 'Profile') {
       this.nav.setRoot(page.component, { userId: this.authData.authState.uid });
     }
     else {

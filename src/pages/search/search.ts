@@ -18,7 +18,7 @@ import { SearchProvider } from '../../providers/search';
 export class SearchPage {
 
   public searchResults: Array<Object>;
-
+  private query: string;
   /**
    * 
    * @param navCtrl 
@@ -45,8 +45,8 @@ export class SearchPage {
    * @memberOf SearchPage
    */
   public searchEvent(event): void {
-    let query: string = event.target.value;
-    this.search.getSearchResults(query).then(value => {
+    this.query = event.target.value;
+    this.search.getSearchResults(this.query).then(value => {
       this.searchResults = value;
       console.log(value);
 
