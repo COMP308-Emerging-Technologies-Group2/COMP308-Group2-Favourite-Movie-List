@@ -18,11 +18,12 @@ GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-G
     <ion-list no-lines>
       <div *ngFor="let p of pages">
 
-        <ion-label class="margin-header" *ngIf="p.title == 'Favorites'"> <hr/> Movies, TVs</ion-label>
-        <ion-label class="margin-header" *ngIf="p.title == 'Friends'"> <hr/> Social</ion-label>
-        <ion-label class="margin-header" *ngIf="p.title == 'Profile'"><hr/> Personal</ion-label>
+        <ion-label class="margin-header" *ngIf="p.title == 'Favorites' && isLoggedIn"> <hr/> Movies, TVs</ion-label>
+        <ion-label class="margin-header" *ngIf="p.title == 'Friends' && isLoggedIn"> <hr/> Social</ion-label>
+        <ion-label class="margin-header" *ngIf="p.title == 'Profile' && isLoggedIn"><hr/> Personal</ion-label>
 
-        <ion-item menuClose (click)="openPage(p)">
+        <ion-item menuClose (click)="openPage(p)" *ngIf="(isLoggedIn && p.title !== 'Login') || p.title === 'Home' ||
+                                                            (!isLoggedIn && p.title === 'Login')">
           <ion-icon icon-left [name]="p.icon"></ion-icon>
           {{p.title}}
         </ion-item>
