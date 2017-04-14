@@ -1,9 +1,22 @@
+/**
+ * File Name:     pages/friends-list/friends-list.ts
+ * Description:   Logic component of friends list page.
+ * Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+ * GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
+ */
+
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FavoritesPage } from '../favorites/favorites';
 // import angularfire 
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
+/**
+ * Contains logic for friends list page
+ * 
+ * @export
+ * @class FriendsListPage
+ */
 @Component({
   selector: 'page-friends-list',
   templateUrl: 'friends-list.html'
@@ -13,9 +26,15 @@ export class FriendsListPage {
   public friends: Array<any>;
   public userId: string;
 
-  // private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
 
-
+  /**
+   * Creates an instance of FriendsListPage.
+   * @param {NavController} navCtrl 
+   * @param {NavParams} navParams 
+   * @param {AngularFire} af 
+   * 
+   * @memberOf FriendsListPage
+   */
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
 
     // authenication
@@ -38,7 +57,13 @@ export class FriendsListPage {
     });
   }
 
-  // Note: AddFriend takes an email address.
+  /**
+   * Method to add a friend by email
+   * 
+   * @param {string} email 
+   * 
+   * @memberOf FriendsListPage
+   */
   public AddFriend(email: string) {
     console.log("add friend method called");
 
@@ -51,7 +76,13 @@ export class FriendsListPage {
     }
   }
 
-  // Note: RemoveFriend takes an email address.
+  /**
+   * Method to remove a friend by email
+   * 
+   * @param {*} f 
+   * 
+   * @memberOf FriendsListPage
+   */
   public removeFriend(f: any) {
     this.friends = [];
     console.log("delete friend method called");
@@ -67,8 +98,15 @@ export class FriendsListPage {
 
     this.friendsList.remove(key).then(() => { console.log("Sucessfully Removed") }, err => { console.log(err) });
   }
-
-  // method to check if a user already has a friend
+  
+  /**
+   * Method to check if a user already has a friend
+   * 
+   * @param {string} email 
+   * @returns {boolean} 
+   * 
+   * @memberOf FriendsListPage
+   */
   public CheckIfExists(email: string): boolean {
     let check: boolean = false;
     this.friendsList.subscribe(data => {
@@ -82,6 +120,14 @@ export class FriendsListPage {
     return check;
   }
 
+
+  /**
+   * Method to view a friend's details
+   * 
+   * @param {*} friendInfo 
+   * 
+   * @memberOf FriendsListPage
+   */
   viewDetails(friendInfo: any) {
     console.log("User Id: " + friendInfo.$key);
     this.navCtrl.push(FavoritesPage, { userId: friendInfo.$key });

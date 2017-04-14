@@ -1,9 +1,22 @@
+/**
+ * File Name:     pages/home/home.ts
+ * Description:   Logic component of home page.
+ * Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+ * GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
+ */
+
 import { Component, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams, LoadingController, Loading, Content } from 'ionic-angular';
 import { MovieDetailsPage } from '../../pages/movie-details/movie-details';
 
 
+/**
+ * Contains logic for home page
+ * 
+ * @export
+ * @class HomePage
+ */
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'

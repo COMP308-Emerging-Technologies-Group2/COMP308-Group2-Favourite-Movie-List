@@ -1,3 +1,10 @@
+/**
+ * File Name:     app/component.ts
+ * Description:   Entry point of the program
+ * Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+ * GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
+ */
+
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { OneSignal } from '@ionic-native/onesignal';
@@ -35,6 +42,12 @@ const firebaseAuthConfig = {
   method: AuthMethods.Password
 };
 
+/**
+ * Specifies app's structure, dependencies, etc.
+ * 
+ * @export
+ * @class AppModule
+ */
 @NgModule({
   declarations: [
     MyApp,
