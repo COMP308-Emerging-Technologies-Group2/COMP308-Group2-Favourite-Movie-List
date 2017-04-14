@@ -17,6 +17,7 @@ export class SearchUserPage {
   public searchProperties: Array<string>;
   private query: string = "";
   public userId: string;
+  private isSelfSearch: boolean = false;
   public friendsList: FirebaseListObservable<any>;
   /**
    * 
@@ -63,7 +64,13 @@ export class SearchUserPage {
           value.subscribe(data => {
             data.forEach(obj => {
               console.log(obj);
-              this.searchResults.push(obj);
+              if (obj.$key == this.userId) {
+                this.isSelfSearch = true;
+              }
+              else {
+                this.isSelfSearch = false;
+                this.searchResults.push(obj);
+              }
             })
           })
         }
@@ -94,7 +101,7 @@ export class SearchUserPage {
     console.log("UserId to Add" + searchResult.$key);
 
     let check = this.checkIfExists(searchResult.$key);
-    console.log("user exists? => "+check);
+    console.log("user exists? => " + check);
 
     if (check == false) {
       this.friendsList.push({
@@ -110,14 +117,20 @@ export class SearchUserPage {
   // method to check if a user already has a friend
   public checkIfExists(friendId: string): boolean {
     let check: boolean = false;
-    this.friendsList.subscribe(data => {
-      data.forEach(friend => {
-        console.log("comparing " + friend.friendId + " and " + friendId);
-        if (friend.friendId == friendId) {
-          check = true;
-        }
+    if (friendId == this.userId) {
+      check = true;
+    }
+    else {
+      this.friendsList.subscribe(data => {
+        data.forEach(friend => {
+          console.log("comparing " + friend.friendId + " and " + friendId);
+
+          if (friend.friendId == friendId) {
+            check = true;
+          }
+        });
       });
-    });
+    }
     return check;
   }
 }
