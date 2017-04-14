@@ -69,7 +69,8 @@ export class MyApp {
       { title: 'Friends', icon: 'people', component: FriendsListPage },
       { title: 'Add Friends', icon: 'person-add', component: SearchUserPage },
       { title: 'Profile', icon: 'person', component: UserDetailsPage },
-      { title: 'Logout', icon: 'exit', component: LoginPage }
+      { title: 'Logout', icon: 'exit', component: LoginPage },
+      { title: 'Login', icon: 'exit', component: LoginPage }
 
     ];
 
