@@ -1,12 +1,12 @@
 <!--
-  Generated template for the Episodes page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
+File Name:     pages/episodes/episodes.html
+Description:   Presentation component of episode list page
+Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Episodes</ion-title>
   </ion-navbar>
 
@@ -16,9 +16,9 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let episode of episodes">
-      <h2>{{episode.season}} x {{episode.episode}} - {{episode.name}}</h2>
-      <p> Released: {{episode.released | date:'mediumDate' }} </p>
-      <p> Rating: {{episode.rating}} </p>
+      <h2 (click)="reviewEpisode(episode)">{{episode.season}} x {{episode.episode}} - {{episode.name}}</h2>
+      <p (click)="reviewEpisode(episode)"> Released: {{episode.released | date:'mediumDate' }} </p>
+      <p (click)="reviewEpisode(episode)"> Rating: {{episode.rating}} </p>
       <button ion-button clear item-right (click)="reviewEpisode(episode)">View</button>
     </ion-item>
   </ion-list>
