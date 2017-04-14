@@ -15,6 +15,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { AuthData } from '../providers/auth-data';
 import { MovieDetailsPage } from '../pages/movie-details/movie-details';
+import { EpisodesPage } from '../pages/episodes/episodes';
+import { EpisodeDetailsPage } from '../pages/episode-details/episode-details';
 import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
@@ -58,6 +60,8 @@ const firebaseAuthConfig = {
     SearchUserPage,
     HomePage,
     MovieDetailsPage,
+    EpisodesPage,
+    EpisodeDetailsPage,
     FavoritesPage,
     FriendsListPage,
     UserDetailsPage,
@@ -77,6 +81,8 @@ const firebaseAuthConfig = {
     SearchUserPage,
     HomePage,
     MovieDetailsPage,
+    EpisodesPage,
+    EpisodeDetailsPage,
     FavoritesPage,
     FriendsListPage,
     UserDetailsPage,
