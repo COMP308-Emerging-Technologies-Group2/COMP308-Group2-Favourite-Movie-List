@@ -1,3 +1,10 @@
+/**
+ * File Name:     app/component.ts
+ * Description:   Entry point of the program
+ * Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+ * GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
+ */
+
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -13,6 +20,12 @@ import { SearchUserPage } from "../pages/search-user/search-user";
 import { AuthData } from '../providers/auth-data';
 import { OneSignal } from '@ionic-native/onesignal';
 
+/**
+ * Entry point of the program.
+ * 
+ * @export
+ * @class MyApp
+ */
 @Component({
   templateUrl: 'app.html',
   providers: [OneSignal]
@@ -24,6 +37,17 @@ export class MyApp {
 
   pages: Array<{ title: string, icon: string, component: any }>;
 
+/**
+ * Creates an instance of MyApp.
+ * @param {Platform} platform 
+ * @param {StatusBar} statusBar 
+ * @param {SplashScreen} splashScreen 
+ * @param {AngularFire} af 
+ * @param {AuthData} authData 
+ * @param {OneSignal} oneSignal 
+ * 
+ * @memberOf MyApp
+ */
   constructor(public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
@@ -61,6 +85,12 @@ export class MyApp {
     });
   }
 
+  /**
+   * Method to initialize the environment
+   * 
+   * 
+   * @memberOf MyApp
+   */
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -81,6 +111,13 @@ export class MyApp {
     });
   }
 
+  /**
+   * Method to display a speficied page
+   * 
+   * @param {any} page 
+   * 
+   * @memberOf MyApp
+   */
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario

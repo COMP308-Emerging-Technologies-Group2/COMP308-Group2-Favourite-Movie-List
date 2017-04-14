@@ -1,3 +1,10 @@
+/**
+ * File Name:     pages/movie-details/movie-details.ts
+ * Description:   Logic component of movie details page.
+ * Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+ * GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
+ */
+
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
@@ -8,6 +15,12 @@ import { FavoritesPage } from '../favorites/favorites';
 // import angularfire
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
+/**
+ * Contains logic for movie details page
+ * 
+ * @export
+ * @class MovieDetailsPage
+ */
 @Component({
   selector: 'page-movie-details',
   templateUrl: 'movie-details.html'
@@ -22,6 +35,16 @@ export class MovieDetailsPage {
   public check: boolean;
   public posterAvailable: boolean = true;
 
+  /**
+   * Creates an instance of MovieDetailsPage.
+   * @param {NavController} navCtrl 
+   * @param {NavParams} navParams 
+   * @param {Http} http 
+   * @param {AngularFire} af 
+   * @param {AlertController} alertCtrl 
+   * 
+   * @memberOf MovieDetailsPage
+   */
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private authData: AuthData,
@@ -52,6 +75,12 @@ export class MovieDetailsPage {
     );
   }
 
+  /**
+   * Method to add movie to current user's favorites
+   * 
+   * 
+   * @memberOf MovieDetailsPage
+   */
   public AddToFavorites(): void {
     console.log("STARTING ADDTOFAVORITES");
 
@@ -68,6 +97,12 @@ export class MovieDetailsPage {
     this.navCtrl.setRoot(FavoritesPage, { userId: this.authData.authState.uid });
   }
 
+  /**
+   * Method to remove movie to current user's favorites
+   * 
+   * 
+   * @memberOf MovieDetailsPage
+   */
   public RemoveFromFavorites(): void {
     let key: string = "";
     //console.log(this.media.imdbid);
@@ -83,6 +118,13 @@ export class MovieDetailsPage {
 
   }
 
+  /**
+   * Method to check if this movie is already in the user's favorites
+   * 
+   * @returns {boolean} 
+   * 
+   * @memberOf MovieDetailsPage
+   */
   public checkIfExists(): boolean {
     let check: boolean = false;
     this.favorites.subscribe(data => {

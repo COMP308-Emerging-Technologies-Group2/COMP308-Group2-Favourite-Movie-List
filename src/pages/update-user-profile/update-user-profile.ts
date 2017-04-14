@@ -1,3 +1,10 @@
+/**
+ * File Name:     pages/update-user-profile/update-user-profile.ts
+ * Description:   Logic component of update-user-profile page.
+ * Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+ * GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
+ */
+
 import {Component} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Loading, NavController, AlertController, LoadingController, NavParams} from "ionic-angular";
@@ -6,6 +13,12 @@ import {EmailValidator} from "../../validators/email";
 import {UserSettingsModel} from "../../models/user-settings";
 import {UserSettingsProvider} from "../../providers/user-settings";
 
+/**
+ * Contains logic to update user profiles
+ * 
+ * @export
+ * @class UpdateUserProfilePage
+ */
 @Component({
   selector: 'page-update-user-profile',
   templateUrl: 'update-user-profile.html'
@@ -15,6 +28,18 @@ export class UpdateUserProfilePage {
   userSettings: UserSettingsModel;
   loading: Loading;
 
+  /**
+   * Creates an instance of UpdateUserProfilePage.
+   * @param {NavController} navCtrl 
+   * @param {NavParams} navParams 
+   * @param {AlertController} alertCtrl 
+   * @param {LoadingController} loadingCtrl 
+   * @param {FormBuilder} formBuilder 
+   * @param {AuthData} authData 
+   * @param {UserSettingsProvider} us 
+   * 
+   * @memberOf UpdateUserProfilePage
+   */
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl: AlertController,
@@ -24,6 +49,12 @@ export class UpdateUserProfilePage {
               public us: UserSettingsProvider) {
   }
 
+  /**
+   * Action to perform when the page is loaded
+   * 
+   * 
+   * @memberOf UpdateUserProfilePage
+   */
   ionViewDidEnter() {
     this.loading = this.loadingCtrl.create({content: 'Getting user\'s data...'});
 
@@ -56,6 +87,12 @@ export class UpdateUserProfilePage {
     });
   }
 
+  /**
+   * Method to handle user profile update events
+   * 
+   * 
+   * @memberOf UpdateUserProfilePage
+   */
   updateUserProfile() {
     if (!this.profileForm.valid) {
       this.alertCtrl.create({

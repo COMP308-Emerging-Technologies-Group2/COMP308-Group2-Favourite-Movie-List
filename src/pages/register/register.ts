@@ -1,3 +1,10 @@
+/**
+ * File Name:     pages/register/register.ts
+ * Description:   Logic component of user registration page.
+ * Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+ * GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
+ */
+
 import { Component } from "@angular/core";
 import { NavController, Loading, AlertController, LoadingController } from "ionic-angular";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
@@ -7,6 +14,12 @@ import { HomePage } from "../home/home";
 import { UserSettingsModel } from "../../models/user-settings";
 import { EmailPasswordCredentials } from "angularfire2/auth";
 
+/**
+ * Contains logic of user registration page.
+ * 
+ * @export
+ * @class RegisterPage
+ */
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html'
@@ -15,6 +28,16 @@ export class RegisterPage {
   registerForm: FormGroup;
   loading: Loading;
 
+  /**
+   * Creates an instance of RegisterPage.
+   * @param {NavController} navCtrl 
+   * @param {AlertController} alertCtrl 
+   * @param {LoadingController} loadingCtrl 
+   * @param {FormBuilder} formBuilder 
+   * @param {AuthData} authData 
+   * 
+   * @memberOf RegisterPage
+   */
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
@@ -27,6 +50,12 @@ export class RegisterPage {
     });
   }
 
+  /**
+   * Method to register a user (create a UserSettingsModel class and saving to DB)
+   * 
+   * 
+   * @memberOf RegisterPage
+   */
   registerUser() {
     if (!this.registerForm.valid) {
       if (this.registerForm.value.email === ""

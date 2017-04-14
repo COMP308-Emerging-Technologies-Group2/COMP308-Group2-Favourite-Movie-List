@@ -1,3 +1,10 @@
+/**
+ * File Name:     pages/favorites/favorites.ts
+ * Description:   Logic component of favorites page.
+ * Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+ * GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
+ */
+
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
@@ -7,12 +14,12 @@ import { MovieDetailsPage } from '../../pages/movie-details/movie-details';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 
-/*
-  Generated class for the Favorites page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+/**
+ * Contains logic for favorites page
+ * 
+ * @export
+ * @class FavoritesPage
+ */
 @Component({
   selector: 'page-favorites',
   templateUrl: 'favorites.html'
@@ -24,6 +31,15 @@ export class FavoritesPage {
   public favorites;
   private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
 
+  /**
+   * Creates an instance of FavoritesPage.
+   * @param {NavController} navCtrl 
+   * @param {NavParams} navParams 
+   * @param {AngularFire} af 
+   * @param {Http} http 
+   * 
+   * @memberOf FavoritesPage
+   */
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public http: Http) {
     this.movies = [];
 
@@ -49,12 +65,26 @@ export class FavoritesPage {
     });
   }
 
+  /**
+   * Method that handles event when user clicks on one particular movie
+   * 
+   * @param {string} id 
+   * 
+   * @memberOf FavoritesPage
+   */
   public viewDetails(id: string) {
     this.navCtrl.push(MovieDetailsPage, {
       'id': id
     });
   }
 
+  /**
+   * Method that handles event when user deletes one particular movie from favorites
+   * 
+   * @param {string} id 
+   * 
+   * @memberOf FavoritesPage
+   */
   public deleteMedia(id: string) {
     this.movies = [];
     let key: string = "";

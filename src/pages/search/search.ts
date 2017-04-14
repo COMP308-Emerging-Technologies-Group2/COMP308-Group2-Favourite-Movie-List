@@ -1,15 +1,23 @@
+/**
+ * File Name:     pages/search/search.ts
+ * Description:   Logic component of search page.
+ * Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+ * GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
+ */
+
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
 import { MovieDetailsPage } from '../movie-details/movie-details';
 import { SearchProvider } from '../../providers/search';
 
-/*
-  Generated class for the Search page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+/**
+ * Contains logic for search page (searching for a movie)
+ * 
+ * @export
+ * @class SearchPage
+ */
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html',
@@ -19,12 +27,15 @@ export class SearchPage {
 
   public searchResults: Array<Object>;
   private query: string;
+  
   /**
+   * Creates an instance of SearchPage.
+   * @param {NavController} navCtrl 
+   * @param {NavParams} navParams 
+   * @param {Http} http 
+   * @param {SearchProvider} search 
    * 
-   * @param navCtrl 
-   * @param navParams 
-   * @param http 
-   * @param search 
+   * @memberOf SearchPage
    */
   constructor(
     private navCtrl: NavController,

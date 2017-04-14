@@ -1,18 +1,43 @@
+/**
+ * File Name:     providers/search.ts
+ * Description:   A provider service that contains movie-related information and data
+ * Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+ * GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
+ */
+
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 
+/**
+ * Contains movie-related information and data
+ * 
+ * @export
+ * @class SearchProvider
+ */
 @Injectable()
 export class SearchProvider {
 
+  /**
+   * Creates an instance of SearchProvider.
+   * @param {Http} http 
+   * 
+   * @memberOf SearchProvider
+   */
   constructor(public http: Http) {
     console.log('Hello Search Provider');
   }
 
 
+
   /**
-   * getSearchResults
+   * Gets search result from imdb
+   * 
+   * @param {string} query 
+   * @returns {Promise<Array<Object>>} 
+   * 
+   * @memberOf SearchProvider
    */
   public getSearchResults(query: string): Promise<Array<Object>> {
     return new Promise<Array<Object>>((resolve, reject) => {

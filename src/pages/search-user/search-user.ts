@@ -1,3 +1,10 @@
+/**
+ * File Name:     pages/search-user/search-user.ts
+ * Description:   Logic component of search-user page.
+ * Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+ * GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
+ */
+
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { SearchUserProvider } from '../../providers/search-user';
@@ -6,6 +13,12 @@ import { FriendsListPage } from '../friends-list/friends-list';
 // import angularfire
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
+/**
+ * Contains logic to search users
+ * 
+ * @export
+ * @class SearchUserPage
+ */
 @Component({
   selector: 'page-search-user',
   templateUrl: 'search-user.html',
@@ -20,12 +33,16 @@ export class SearchUserPage {
   private isSelfSearch: boolean = false;
   private isNoResults: boolean = false;
   public friendsList: FirebaseListObservable<any>;
+
+
   /**
+   * Creates an instance of SearchUserPage.
+   * @param {NavController} navCtrl 
+   * @param {NavParams} navParams 
+   * @param {SearchUserProvider} search 
+   * @param {AngularFire} af 
    * 
-   * @param navCtrl 
-   * @param navParams 
-  //  * @param http 
-   * @param search 
+   * @memberOf SearchUserPage
    */
   constructor(
     private navCtrl: NavController,
@@ -99,11 +116,25 @@ export class SearchUserPage {
     this.searchResults = new Array<Object>();
   }
 
+  /**
+   * Method to handle event when user views details of a particular user
+   * 
+   * @param {*} searchResult 
+   * 
+   * @memberOf SearchUserPage
+   */
   viewDetails(searchResult: any) {
     console.log("User Id: " + searchResult.$key);
     this.navCtrl.push(FavoritesPage, { userId: searchResult.$key });
   }
 
+  /**
+   * Method to handle event when user adds a friend
+   * 
+   * @param {*} searchResult 
+   * 
+   * @memberOf SearchUserPage
+   */
   addFriend(searchResult: any) {
     console.log("UserId to Add" + searchResult.$key);
 
@@ -128,7 +159,14 @@ export class SearchUserPage {
 
   }
 
-  // method to check if a user already has a friend
+  /**
+   * Method to check if user already has a friend
+   * 
+   * @param {string} friendId 
+   * @returns {boolean} 
+   * 
+   * @memberOf SearchUserPage
+   */
   public checkIfExists(friendId: string): boolean {
     let check: boolean = false;
 
