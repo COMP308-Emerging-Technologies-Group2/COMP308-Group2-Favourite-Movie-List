@@ -1,3 +1,13 @@
 page-favorites {
-
+ ion-content {
+     ion-list {
+         ion-item {
+             ion-thumbnail {
+                 img {
+                     width:auto !important;
+                 }
+             }
+         }
+     }
+  }
 }

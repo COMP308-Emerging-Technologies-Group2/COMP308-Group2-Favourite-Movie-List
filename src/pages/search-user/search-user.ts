@@ -6,7 +6,7 @@
  */
 
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { SearchUserProvider } from '../../providers/search-user';
 import { FavoritesPage } from '../favorites/favorites';
 import { FriendsListPage } from '../friends-list/friends-list';
@@ -31,6 +31,7 @@ export class SearchUserPage {
   private query: string = "";
   public userId: string;
   private isSelfSearch: boolean = false;
+  private isNoResults: boolean = false;
   public friendsList: FirebaseListObservable<any>;
 
 
@@ -48,7 +49,8 @@ export class SearchUserPage {
     private navParams: NavParams,
     // private http: Http,
     private search: SearchUserProvider,
-    private af: AngularFire
+    private af: AngularFire,
+    public alertCtrl: AlertController,
   ) {
     this.searchResults = new Array<any>();
     this.searchProperties = ['_displayName', '_email'];
@@ -70,11 +72,16 @@ export class SearchUserPage {
 
     this.query = event.target.value;
     this.searchResults.length = 0; //empty array
-
+    this.isSelfSearch = false;
+    if (this.query === '') {
+      this.isNoResults = false;
+    }
+    else {
+      this.isNoResults = true;
+    }
     // unfortunately, firebase doesn't do search functions
     // so I'm looping through all search properties
     // and putting all objects in an array
-
     this.searchProperties.forEach(searchProperty =>
       this.search.getSearchResults(searchProperty, this.query).then(value => {
         if (typeof value !== 'undefined') {
@@ -84,9 +91,9 @@ export class SearchUserPage {
               if (obj.$key == this.userId) {
                 this.isSelfSearch = true;
               }
-              else {
-                this.isSelfSearch = false;
+              else {              
                 this.searchResults.push(obj);
+                this.isNoResults = false;
               }
             })
           })
@@ -142,6 +149,13 @@ export class SearchUserPage {
       }).catch(err => console.log(err));
       this.navCtrl.push(FriendsListPage);
     }
+    else
+    {
+      this.alertCtrl.create({
+          message: searchResult._displayName + " is your friend already",
+          buttons: [{ text: 'Ok', role: 'Cancel' }]
+        }).present();
+    }
 
   }
 
@@ -155,20 +169,15 @@ export class SearchUserPage {
    */
   public checkIfExists(friendId: string): boolean {
     let check: boolean = false;
-    if (friendId == this.userId) {
-      check = true;
-    }
-    else {
-      this.friendsList.subscribe(data => {
-        data.forEach(friend => {
-          console.log("comparing " + friend.friendId + " and " + friendId);
 
-          if (friend.friendId == friendId) {
-            check = true;
-          }
-        });
+    this.friendsList.subscribe(data => {
+      data.forEach(friend => {
+        console.log("comparing " + friend.friendId + " and " + friendId);
+        if (friend.friendId == friendId) {
+          check = true;
+        }
       });
-    }
+    });
     return check;
   }
 }

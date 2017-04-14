@@ -14,10 +14,20 @@ GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-G
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
+    <br/>
+    <ion-list no-lines>
+      <div *ngFor="let p of pages">
+
+        <ion-label class="margin-header" *ngIf="p.title == 'Favorites'"> <hr/> Movies, TVs</ion-label>
+        <ion-label class="margin-header" *ngIf="p.title == 'Friends'"> <hr/> Social</ion-label>
+        <ion-label class="margin-header" *ngIf="p.title == 'Profile'"><hr/> Personal</ion-label>
+
+        <ion-item menuClose (click)="openPage(p)">
+          <ion-icon icon-left [name]="p.icon"></ion-icon>
+          {{p.title}}
+        </ion-item>
+
+      </div>
     </ion-list>
   </ion-content>
 

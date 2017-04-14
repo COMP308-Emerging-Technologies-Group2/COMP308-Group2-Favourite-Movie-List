@@ -31,11 +31,11 @@ GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-G
   </div>
 
   <!-- Empty search results message -->
-  <div *ngIf="searchResults.length === 0 && query!=='' && !isSelfSearch" padding>
-    <h2>No results found for {{query}}</h2>
+  <div *ngIf="isNoResults && !isSelfSearch" padding>
+    <h2>No results found for "{{query}}"</h2>
   </div>
 
-  <div *ngIf="searchResults.length === 0 && query!=='' && isSelfSearch" padding>
+  <div *ngIf="isSelfSearch" padding>
     <h2>C'mon {{query}}, it's you ;-)</h2>
   </div>
 
