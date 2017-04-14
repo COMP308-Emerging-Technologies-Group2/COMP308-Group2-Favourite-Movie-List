@@ -10,13 +10,13 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { MovieDetailsPage } from '../../pages/movie-details/movie-details';
 
-// import angularfire 
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
+import "rxjs/add/operator/first";
 
 
 /**
  * Contains logic for favorites page
- * 
+ *
  * @export
  * @class FavoritesPage
  */
@@ -25,7 +25,6 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
   templateUrl: 'favorites.html'
 })
 export class FavoritesPage {
-  public favoritesList: FirebaseListObservable<any>;
   public movies: Array<any>;
   public userId: string;
   public favorites;
@@ -33,11 +32,11 @@ export class FavoritesPage {
 
   /**
    * Creates an instance of FavoritesPage.
-   * @param {NavController} navCtrl 
-   * @param {NavParams} navParams 
-   * @param {AngularFire} af 
-   * @param {Http} http 
-   * 
+   * @param {NavController} navCtrl
+   * @param {NavParams} navParams
+   * @param {AngularFire} af
+   * @param {Http} http
+   *
    * @memberOf FavoritesPage
    */
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public http: Http) {
@@ -48,7 +47,7 @@ export class FavoritesPage {
     console.log("UID for Favourites: " + this.userId);
 
     // Getting the value from the database
-    this.af.database.list('/users-favorites/' + this.userId + '/').subscribe(data => {
+    this.af.database.list('/users-favorites/' + this.userId + '/').first().subscribe(data => {
       //console.log(data);
       data.forEach(element => {
         this.favorites = element;
@@ -67,9 +66,9 @@ export class FavoritesPage {
 
   /**
    * Method that handles event when user clicks on one particular movie
-   * 
-   * @param {string} id 
-   * 
+   *
+   * @param {string} id
+   *
    * @memberOf FavoritesPage
    */
   public viewDetails(id: string) {
@@ -80,9 +79,9 @@ export class FavoritesPage {
 
   /**
    * Method that handles event when user deletes one particular movie from favorites
-   * 
-   * @param {string} id 
-   * 
+   *
+   * @param {string} id
+   *
    * @memberOf FavoritesPage
    */
   public deleteMedia(id: string) {
