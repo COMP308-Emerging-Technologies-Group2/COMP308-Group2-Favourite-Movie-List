@@ -6,7 +6,7 @@ GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-G
 -->
 
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -18,8 +18,8 @@ GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-G
 <ion-content>
   <ion-searchbar type="search" (ionInput)="searchEvent($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
   <div *ngIf="searchResults">
-  <ion-list>
-    <button text-wrap ion-item *ngFor="let searchResult of searchResults" (click)="viewDetails(searchResult.id)" >
+    <ion-list>
+      <button text-wrap ion-item *ngFor="let searchResult of searchResults" (click)="viewDetails(searchResult.id)">
       <ion-grid>
         <ion-row>
           <ion-col col-3>
@@ -33,7 +33,7 @@ GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-G
         </ion-row>
       </ion-grid>
     </button>
-  </ion-list>
+    </ion-list>
   </div>
   <div *ngIf="!searchResults" padding>
     <h2>No results found for "{{query}}"</h2>
