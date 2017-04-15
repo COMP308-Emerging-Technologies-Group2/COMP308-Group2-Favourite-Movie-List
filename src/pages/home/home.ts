@@ -108,7 +108,9 @@ export class HomePage {
    * @memberOf HomePage
    */
   public viewDetails(id: string) {
-    if (this.authData.authState.uid) {
+    console.log(this.authData.authState);
+    
+    if (this.authData.authState) {
       this.navCtrl.push(MovieDetailsPage, {
         'id': id
       });
