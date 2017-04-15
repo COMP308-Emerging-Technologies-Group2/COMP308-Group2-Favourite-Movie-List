@@ -8,6 +8,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams, LoadingController, Loading, Content } from 'ionic-angular';
+import { AuthData } from '../../providers/auth-data';
+
+
 import { MovieDetailsPage } from '../../pages/movie-details/movie-details';
 
 
@@ -39,6 +42,7 @@ export class HomePage {
    * @param {NavController} navCtrl 
    * @param {NavParams} navParams 
    * @param {Http} http 
+   * @param {AuthData} authData 
    * @param {LoadingController} loadingCtrl 
    * 
    * @memberOf HomePage
@@ -47,6 +51,7 @@ export class HomePage {
     private navCtrl: NavController,
     private navParams: NavParams,
     private http: Http,
+    private authData: AuthData,
     private loadingCtrl: LoadingController
   ) {
     this.loading = this.loadingCtrl.create();
@@ -103,9 +108,12 @@ export class HomePage {
    * @memberOf HomePage
    */
   public viewDetails(id: string) {
-    this.navCtrl.push(MovieDetailsPage,{
-      'id': id
-    });
+    if (this.authData.authState.uid) {
+      this.navCtrl.push(MovieDetailsPage, {
+        'id': id
+      });
+    }
+
   }
 
 
