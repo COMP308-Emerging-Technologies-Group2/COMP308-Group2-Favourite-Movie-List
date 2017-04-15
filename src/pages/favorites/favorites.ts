@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { MovieDetailsPage } from '../../pages/movie-details/movie-details';
+import { Calendar } from '@ionic-native/calendar';
 
 import { AngularFire } from 'angularfire2';
 import "rxjs/add/operator/first";
@@ -26,8 +27,9 @@ import "rxjs/add/operator/first";
 })
 export class FavoritesPage {
   public movies: Array<any>;
-  public userId: string;
+  public userId: string;  
   public favorites;
+  public calendar : Calendar;
   private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
 
   /**
@@ -40,6 +42,7 @@ export class FavoritesPage {
    * @memberOf FavoritesPage
    */
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public http: Http) {
+    this.calendar = new Calendar();
     this.movies = [];
 
     // favorites for userId
@@ -83,6 +86,15 @@ export class FavoritesPage {
     this.navCtrl.push(MovieDetailsPage, {
       'id': id
     });
+  }
+
+  public addToCalendar(movie: any) {
+    console.log(movie);
+    
+    let startDate = new Date(movie.released);
+    let endDate = new Date(movie.released);
+    // This works for movies.
+    this.calendar.createEventInteractively(movie.title, movie.actors, movie.genre, startDate, endDate).then(() => alert("Added to Calendar"));
   }
 
   /**
