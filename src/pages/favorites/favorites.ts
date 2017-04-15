@@ -47,6 +47,14 @@ export class FavoritesPage {
     console.log("UID for Favourites: " + this.userId);
 
     // Getting the value from the database
+    this._getUserFavorites();
+  }
+
+
+  /**
+   * 
+   */
+  private _getUserFavorites():void{    
     this.af.database.list('/users-favorites/' + this.userId + '/').first().subscribe(data => {
       //console.log(data);
       data.forEach(element => {
@@ -88,15 +96,19 @@ export class FavoritesPage {
     this.movies = [];
     let key: string = "";
     console.log(id);
-    this.af.database.list('/users-favorites/' + this.userId + '/').subscribe(data => {
+    this.af.database.list('/users-favorites/' + this.userId + '/').first().subscribe(data => {
       //console.log(data);
       data.forEach(element => {
         if (element.imdbID == id) {
           key = element.$key;
-          this.af.database.list('/users-favorites/' + this.userId + '/').remove(key).then(() => { console.log("Sucessfully Removed") }, err => { console.log(err) });
+          this.af.database.list('/users-favorites/' + this.userId + '/').remove(key).then(() => {
+            console.log("Sucessfully Removed");
+            this._getUserFavorites();
+            },
+            err => { console.log(err) });
         }
       })
-    }).unsubscribe();
+    });
   }
 
   ionViewDidLoad() {
