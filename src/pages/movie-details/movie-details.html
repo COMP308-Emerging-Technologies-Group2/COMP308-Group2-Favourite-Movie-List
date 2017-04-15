@@ -56,6 +56,12 @@ GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-G
         <h2>Genres</h2>
         <p text-wrap>{{media.genres}}</p>
       </ion-item>
+
+      <ion-item (click)="showEpisodes(media.imdbid)">
+        <ion-icon name="albums" item-left large></ion-icon>
+        <h2>Episodes </h2>
+      </ion-item> 
+
       <div *ngIf="check==false">
       <button ion-item large icon-left text-center color="primary" (click)="AddToFavorites()">
         <ion-icon name="bookmark"></ion-icon>

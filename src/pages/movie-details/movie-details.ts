@@ -10,6 +10,7 @@ import { Http } from '@angular/http';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthData } from '../../providers/auth-data';
 import { HomePage } from '../home/home';
+import { EpisodesPage } from '../episodes/episodes';
 import { FavoritesPage } from '../favorites/favorites';
 
 // import angularfire
@@ -34,7 +35,7 @@ export class MovieDetailsPage {
   public userId: string;
   public check: boolean;
   public posterAvailable: boolean = true;
-
+  public episodesAvailable: boolean = false;
   /**
    * Creates an instance of MovieDetailsPage.
    * @param {NavController} navCtrl 
@@ -62,9 +63,11 @@ export class MovieDetailsPage {
       data => {
         //console.log(data);
         this.media = data;
+        console.log(data);
         // Checks if the movie already exists
         this.check = this.checkIfExists();
         if (data['_episodes']) {
+          this.episodesAvailable = true;
           console.log('there are _episodes');
         }
         if (data['poster'] === 'N/A') {
@@ -137,6 +140,13 @@ export class MovieDetailsPage {
       });
     });
     return check;
+  }
+
+  public showEpisodes(seriesId:string){
+    console.log(seriesId);
+    this.navCtrl.push(EpisodesPage, {
+      'seriesId': seriesId
+    });
   }
 
   ionViewDidLoad() {

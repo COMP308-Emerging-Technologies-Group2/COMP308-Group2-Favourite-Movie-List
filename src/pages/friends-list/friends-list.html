@@ -25,8 +25,8 @@ GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-G
         <ion-thumbnail item-left (click)="viewDetails(friend)">
           <img src="./assets/images/user.png">
         </ion-thumbnail>
-        <h1>{{friend._displayName}}</h1>
-        <h1>{{friend._email}}</h1>
+        <h1 (click)="viewDetails(friend)">{{friend._displayName}}</h1>
+        <h1 (click)="viewDetails(friend)">{{friend._email}}</h1>
         <button ion-button item-right color="danger" (click)="removeFriend(friend)">Delete</button>
       </ion-item>
     </ion-list>

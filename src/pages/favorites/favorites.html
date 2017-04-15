@@ -24,7 +24,8 @@ GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-G
   <ion-list>
     <ion-item *ngFor="let movie of movies">
       <ion-thumbnail item-left (click)="viewDetails(movie.imdbid)">
-        <img src="{{movie.poster}}">
+        <img *ngIf="movie.poster!=='N/A'" src="{{movie.poster}}">
+        <img *ngIf="movie.poster==='N/A'" src="../assets/images/posterPlaceholder.png">
       </ion-thumbnail>
       <h2 (click)="viewDetails(movie.imdbid)">{{movie.title}}</h2>
       <p (click)="viewDetails(movie.imdbid)">{{movie._year_data}}</p>

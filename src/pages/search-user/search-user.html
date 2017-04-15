@@ -23,8 +23,8 @@ GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-G
         <ion-thumbnail item-left (click)="viewDetails(searchResult)">
           <img src="./assets/images/user.png">
         </ion-thumbnail>
-        <h1>{{searchResult._displayName}}</h1>
-        <h3>{{searchResult._email}}</h3>
+        <h1 (click)="viewDetails(searchResult)">{{searchResult._displayName}}</h1>
+        <h3 (click)="viewDetails(searchResult)">{{searchResult._email}}</h3>
         <button ion-button item-right (click)="addFriend(searchResult)">Add</button>
       </ion-item>
     </ion-list>

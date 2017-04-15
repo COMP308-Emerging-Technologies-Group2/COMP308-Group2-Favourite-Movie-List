@@ -1,0 +1,75 @@
+<!--
+File Name:     pages/episode-details/episode-details.html
+Description:   Presentation component of episode details page
+Authors:       Tony Bogun, Liavontsi Brechka, Aaron Fernandes, Omid Khataee, Edward Song
+GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-Group2-Favourite-Movie-List
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Details of {{episode.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <h1 text-wrap>{{episode.name}} ({{episode.season}} x {{episode.episode}})
+        <p>{{episode.released | date:'mediumDate' }}</p>
+      </h1>
+    </ion-item>
+
+    <img *ngIf="posterAvailable" src="{{episode.poster}}">
+    <img *ngIf="!posterAvailable" src="../assets/images/posterPlaceholder.png">
+
+    <ion-card-content>
+      <p>{{episode.plot}}</p>
+
+      <ion-item>
+        <ion-icon name="people" item-left large></ion-icon>
+        <h2>Actors</h2>
+        <p text-wrap>{{episode.actors}}</p>
+      </ion-item>
+
+      <ion-item *ngIf="episode.director!='N/A'">
+        <ion-icon name="videocam" item-left large></ion-icon>
+        <h2>Director</h2>
+        <p text-wrap>{{episode.director}}</p>
+      </ion-item>
+
+      <ion-item *ngIf="episode.director=='N/A'">
+        <ion-icon name="videocam" item-left large></ion-icon>
+        <h2>Writer</h2>
+        <p text-wrap>{{episode.writer}}</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="film" item-left large></ion-icon>
+        <h2>Genres</h2>
+        <p text-wrap>{{episode.genres}}</p>
+      </ion-item>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+        <ion-icon name="star"></ion-icon>
+        <div>{{episode.rating}}</div>
+      </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+        <ion-icon name="person"></ion-icon>
+        <div>Rated: {{episode.rated}}</div>
+      </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          runtime: {{episode.runtime}}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+</ion-content>
