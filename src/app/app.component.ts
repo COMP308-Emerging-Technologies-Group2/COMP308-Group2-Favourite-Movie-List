@@ -22,7 +22,7 @@ import { OneSignal } from '@ionic-native/onesignal';
 
 /**
  * Entry point of the program.
- * 
+ *
  * @export
  * @class MyApp
  */
@@ -34,18 +34,19 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
+  isLoggedIn: boolean;
 
   pages: Array<{ title: string, icon: string, component: any }>;
 
 /**
  * Creates an instance of MyApp.
- * @param {Platform} platform 
- * @param {StatusBar} statusBar 
- * @param {SplashScreen} splashScreen 
- * @param {AngularFire} af 
- * @param {AuthData} authData 
- * @param {OneSignal} oneSignal 
- * 
+ * @param {Platform} platform
+ * @param {StatusBar} statusBar
+ * @param {SplashScreen} splashScreen
+ * @param {AngularFire} af
+ * @param {AuthData} authData
+ * @param {OneSignal} oneSignal
+ *
  * @memberOf MyApp
  */
   constructor(public platform: Platform,
@@ -57,6 +58,9 @@ export class MyApp {
   ) {
     this.initializeApp();
 
+    this.isLoggedIn = false;
+    this.rootPage = HomePage;
+
     this.pages = [
 
       { title: 'Home', icon: 'browsers', component: HomePage },
@@ -65,7 +69,8 @@ export class MyApp {
       { title: 'Friends', icon: 'people', component: FriendsListPage },
       { title: 'Add Friends', icon: 'person-add', component: SearchUserPage },
       { title: 'Profile', icon: 'person', component: UserDetailsPage },
-      { title: 'Logout', icon: 'exit', component: LoginPage }
+      { title: 'Logout', icon: 'exit', component: LoginPage },
+      { title: 'Login', icon: 'exit', component: LoginPage }
 
     ];
 
@@ -76,19 +81,19 @@ export class MyApp {
         console.log('sent id: ' + user.uid);
 
         this.oneSignal.endInit();
-        this.rootPage = HomePage;
-        authObserver.unsubscribe();
-      } else {
-        this.rootPage = LoginPage;
-        authObserver.unsubscribe();
       }
+      authObserver.unsubscribe();
     });
+
+    af.auth.subscribe(user => {
+      this.isLoggedIn = !!user;
+    })
   }
 
   /**
    * Method to initialize the environment
-   * 
-   * 
+   *
+   *
    * @memberOf MyApp
    */
   initializeApp() {
@@ -113,9 +118,9 @@ export class MyApp {
 
   /**
    * Method to display a speficied page
-   * 
-   * @param {any} page 
-   * 
+   *
+   * @param {any} page
+   *
    * @memberOf MyApp
    */
   openPage(page) {
