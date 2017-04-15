@@ -70,10 +70,6 @@ export class MyApp {
 
     ];
 
-    const authObserver = af.auth.subscribe(user => {
-      authObserver.unsubscribe();
-    });
-
     af.auth.subscribe(user => {
       this.isLoggedIn = !!user;
     })
