@@ -21,12 +21,12 @@ GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-G
 
   <div *ngIf="friends">
     <ion-list>
-      <ion-item *ngFor="let friend of friends">
-        <ion-thumbnail item-left (click)="viewDetails(friend)">
+      <ion-item *ngFor="let friend of friends" (click)="viewDetails(friend)" text-wrap>
+        <ion-thumbnail item-left>
           <img src="./assets/images/user.png">
         </ion-thumbnail>
-        <h1 (click)="viewDetails(friend)">{{friend._displayName}}</h1>
-        <h1 (click)="viewDetails(friend)">{{friend._email}}</h1>
+        <h1>{{friend._displayName}}</h1>
+        <h3>{{friend._email}}</h3>
         <button ion-button item-right color="danger" (click)="removeFriend(friend)">Delete</button>
       </ion-item>
     </ion-list>
