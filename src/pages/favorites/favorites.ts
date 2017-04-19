@@ -27,7 +27,8 @@ import "rxjs/add/operator/first";
 })
 export class FavoritesPage {
   public movies: Array<any>;
-  public userId: string;  
+  public userId: string;
+  public fromFriendList: boolean;
   public favorites;
   public calendar : Calendar;
   private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
@@ -48,6 +49,9 @@ export class FavoritesPage {
     // favorites for userId
     this.userId = this.navParams.get('userId');
     console.log("UID for Favourites: " + this.userId);
+
+    // get if the calling page is the friend list
+    this.fromFriendList = this.navParams.get('fromFriendList');
 
     // Getting the value from the database
     this._getUserFavorites();

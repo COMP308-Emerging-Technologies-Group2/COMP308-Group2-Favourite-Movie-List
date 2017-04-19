@@ -130,7 +130,7 @@ export class FriendsListPage {
    */
   viewDetails(friendInfo: any) {
     console.log("User Id: " + friendInfo.$key);
-    this.navCtrl.push(FavoritesPage, { userId: friendInfo.$key });
+    this.navCtrl.push(FavoritesPage, { userId: friendInfo.$key, fromFriendList: true });
   }
 
   ionViewDidLoad() {

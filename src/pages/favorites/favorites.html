@@ -31,7 +31,7 @@ GitHub:        https://github.com/COMP308-Emerging-Technologies-Group2/COMP308-G
       <p (click)="viewDetails(movie.imdbid)">{{movie._year_data}}</p>
       <p (click)="viewDetails(movie.imdbid)">{{movie.rating}}</p>
       <button ion-button color="secondary" (click)="addToCalendar(movie)">Calendar</button>
-      <button ion-button color="danger" (click)="deleteMedia(movie.imdbid)">Delete</button>
+      <button *ngIf="!fromFriendList" ion-button color="danger" (click)="deleteMedia(movie.imdbid)">Delete</button>
     </ion-item>
   </ion-list>
 
