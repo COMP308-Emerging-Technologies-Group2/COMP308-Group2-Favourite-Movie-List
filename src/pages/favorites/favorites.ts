@@ -10,7 +10,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { MovieDetailsPage } from '../../pages/movie-details/movie-details';
 import { Calendar } from '@ionic-native/calendar';
-
 import { AngularFire } from 'angularfire2';
 import "rxjs/add/operator/first";
 
@@ -30,7 +29,7 @@ export class FavoritesPage {
   public userId: string;
   public fromFriendList: boolean;
   public favorites;
-  public calendar : Calendar;
+  public calendar: Calendar;
   private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
   public currentDate: Date;
 
@@ -62,7 +61,7 @@ export class FavoritesPage {
   /**
    * 
    */
-  private _getUserFavorites():void{    
+  private _getUserFavorites(): void {
     this.af.database.list('/users-favorites/' + this.userId + '/').first().subscribe(data => {
       //console.log(data);
       data.forEach(element => {
@@ -72,7 +71,7 @@ export class FavoritesPage {
           //console.log(movieData);
           if (movieData != null) {
             this.movies.push(movieData);
-            if(movieData.released > this.currentDate){
+            if (movieData.released > this.currentDate) {
               // Add a new field to movieData.
               // I don't think this is possible.
             }
@@ -98,32 +97,34 @@ export class FavoritesPage {
   }
 
   public addToCalendar(movie: any) {
-    console.log(movie);
-    
     let startDate = new Date(movie.released);
     let endDate = new Date(movie.released);
-    console.log(startDate);
-    console.log(this.currentDate);
 
-    if(movie._episodes){
+    if (movie._episodes) {
       console.log("This is a TV Show");
-      
-    } 
-    else{
+      //this.calendar.createEventInteractively(movie.title, movie.actors, movie.genre, episodeDate, episodeEndDate).then(() => alert("Added to Calendar"));
+    }
+    else {
       console.log("This is NOT a TV show");
-
-    } 
-    //this.calendar.createEventInteractively(movie.title, movie.actors, movie.genre, startDate, endDate).then(() => alert("Added to Calendar"));
+      this.calendar.createEventInteractively(movie.title, movie.actors, movie.genre, startDate, endDate).then(() => alert("Added to Calendar"));
+    }
   }
 
-  public setCalendarButton(movie: any):boolean {
+  public setCalendarButton(movie: any): boolean {
     let startDate = new Date(movie.released);
-    if(startDate < this.currentDate){
+    // let episodeDate = new Date();
+
+    // For Movies
+    if (startDate < this.currentDate) {
       return false;
     }
-    else{
-      return true; 
+
+    /* For Episodes
+    if (episodeDate < this.currentDate){
+      return false;
     }
+    */
+      return true;
   }
 
   /**
@@ -145,7 +146,7 @@ export class FavoritesPage {
           this.af.database.list('/users-favorites/' + this.userId + '/').remove(key).then(() => {
             console.log("Sucessfully Removed");
             this._getUserFavorites();
-            },
+          },
             err => { console.log(err) });
         }
       })
