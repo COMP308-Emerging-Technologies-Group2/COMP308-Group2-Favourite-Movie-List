@@ -71,10 +71,6 @@ export class FavoritesPage {
           //console.log(movieData);
           if (movieData != null) {
             this.movies.push(movieData);
-            if (movieData.released > this.currentDate) {
-              // Add a new field to movieData.
-              // I don't think this is possible.
-            }
             // Sorting the favorites list
             this.movies.sort((a, b) => { return a['imdbid'].localeCompare(b['imdbid']) });
           }
@@ -103,6 +99,7 @@ export class FavoritesPage {
     if (movie._episodes) {
       console.log("This is a TV Show");
       //this.calendar.createEventInteractively(movie.title, movie.actors, movie.genre, episodeDate, episodeEndDate).then(() => alert("Added to Calendar"));
+      this.calendar.createEventInteractively(movie.title, movie.actors, movie.genre, startDate, endDate).then(() => alert("Added to Calendar"));
     }
     else {
       console.log("This is NOT a TV show");
