@@ -32,6 +32,7 @@ export class FavoritesPage {
   public favorites;
   public calendar : Calendar;
   private imdbApiUrl: string = 'https://imdb-api-wrapper.herokuapp.com';
+  public currentDate: Date;
 
   /**
    * Creates an instance of FavoritesPage.
@@ -45,7 +46,7 @@ export class FavoritesPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public http: Http) {
     this.calendar = new Calendar();
     this.movies = [];
-
+    this.currentDate = new Date();
     // favorites for userId
     this.userId = this.navParams.get('userId');
     console.log("UID for Favourites: " + this.userId);
@@ -71,6 +72,10 @@ export class FavoritesPage {
           //console.log(movieData);
           if (movieData != null) {
             this.movies.push(movieData);
+            if(movieData.released > this.currentDate){
+              // Add a new field to movieData.
+              // I don't think this is possible.
+            }
             // Sorting the favorites list
             this.movies.sort((a, b) => { return a['imdbid'].localeCompare(b['imdbid']) });
           }
@@ -97,8 +102,28 @@ export class FavoritesPage {
     
     let startDate = new Date(movie.released);
     let endDate = new Date(movie.released);
-    // This works for movies.
-    this.calendar.createEventInteractively(movie.title, movie.actors, movie.genre, startDate, endDate).then(() => alert("Added to Calendar"));
+    console.log(startDate);
+    console.log(this.currentDate);
+
+    if(movie._episodes){
+      console.log("This is a TV Show");
+      
+    } 
+    else{
+      console.log("This is NOT a TV show");
+
+    } 
+    //this.calendar.createEventInteractively(movie.title, movie.actors, movie.genre, startDate, endDate).then(() => alert("Added to Calendar"));
+  }
+
+  public setCalendarButton(movie: any):boolean {
+    let startDate = new Date(movie.released);
+    if(startDate < this.currentDate){
+      return false;
+    }
+    else{
+      return true; 
+    }
   }
 
   /**
