@@ -94,6 +94,16 @@ export class FavoritesPage {
 
   public addToCalendar(movie: any) {
     console.log(movie);
+
+    // check if a tv show
+    if (movie['_episodes']) {
+      this.http.get('https://comp308-group2-imdb-scraper.herokuapp.com/tvschedule/'+movie['imdbid']).first().map(res => res.json()).subscribe(
+        data => {
+          console.log(data);
+          
+        }
+      );
+    }
     
     let startDate = new Date(movie.released);
     let endDate = new Date(movie.released);
